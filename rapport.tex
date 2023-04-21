@@ -1,0 +1,123 @@
+
+% Le template fourni a été utilisé pour rédiger cet article.
+
+
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc} 
+%\usepackage[francais]{babel}
+
+%Dimensions
+\usepackage{geometry }
+\geometry{left=2cm,right=2cm,top=3.3cm,bottom=3.3cm}
+
+% AMS packages:
+\usepackage{amsmath, amsthm, amsfonts}
+
+% Theoremess
+%-----------------------------------------------------------------
+
+
+\newtheorem{theoreme}{Th{\'e}or{\`e}me}[section]
+\newtheorem{theoremedefinition}[theoreme]{Th{\'e}or{\`e}me et d{\'e}finition}
+\newtheorem{definitionproposition}[theoreme]{Définition et Proposition}
+\newcommand{\theoremeautorefname}{Th{\'e}or{\`e}me}
+\newtheorem{proposition}[theoreme]{Proposition}%[section]
+\newcommand{\propositionautorefname}{Proposition}
+\newtheorem{lemme}[theoreme]{Lemme}%[section]
+\newcommand{\lemmeautorefname}{Lemme}
+\newtheorem{corollaire}[theoreme]{Corollaire}%[section]
+\newcommand{\corollaireautorefname}{Corollaire}
+\newtheorem{definition}[theoreme]{D\'efinition} %[section]
+\newcommand{\definitionautorefname}{D\'efinition}
+\newtheorem{definitions}[theoreme]{D\'efinitions}%[section]
+\newtheorem{exemple}[theoreme]{Exemple}%[section]
+\newtheorem{exemples}[theoreme]{Exemples}%[section]
+\newtheorem{remarque}[theoreme]{Remarque}%[section]
+\newcommand{\remarqueautorefname}{Remarque}
+\newtheorem{remarques}[theoreme]{Remarques}%[section]
+\newtheorem{probleme}[theoreme]{Probl{\`e}me}%[section]
+\newtheorem{exercice}[theoreme]{Exercice}%[section]
+
+
+% Shortcuts.
+% One can define new commands to shorten frequently used
+% constructions. As an example, this defines the R and Z used
+% for the real and integer numbers.
+%-----------------------------------------------------------------
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+
+% Similarly, one can define commands that take arguments. In this
+% example we define a command for the absolute value.
+% -----------------------------------------------------------------
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+
+% Operators
+% New operators must defined as such to have them typeset
+% correctly. As an example we define the Jacobian:
+% -----------------------------------------------------------------
+\DeclareMathOperator{\Jac}{Jac}
+
+%-----------------------------------------------------------------
+\title{Problèmes aux limites en dimension 1} % votre titre
+\author{Simon Hergott} % votre Prénom Nom
+
+
+\begin{document}
+	\maketitle
+	
+\section{Introduction au problème}
+
+\quad Cet article aura pour but de résumer les résultats et applications concernant les problèmes aux limites en dimension 1. Nous reviendrons sur la méthode des différences finies, fondant l'approximation des solutions des problèmes aux limites, et nous traiterons de plus quelques applications les plus courantes pour cette catégorie de problèmes. Éventuellement, nous verrons brièvement les méthodes de résolution de ces problèmes en dimension 2.
+Rappellons d'abord l'énoncé du modèle du problème aux limites en dimension 1:
+\begin{equation}
+-u''(x) = f(x) \hspace{1cm} \forall x \in ]0,1[ 
+\end{equation}
+\begin{equation}
+u(0) = u(1) = 0
+\end{equation}
+\quad Ce problème est donc simplement caractérisé par l'équation (1), munie des conditions limites (2). Une partie importante lors de la résolution de ce problème est donc de trouver les valeurs propres et les fonctions propres (fonctions ne subissant qu'une transformation scalaire lors de leur utilisation comme solution) de l'équation différentielle
+\begin{equation}
+	X'' + \alpha X = 0 \hspace{1cm} \forall X \in ]0,1[ , \forall \alpha \in \mathbb R*
+\end{equation}
+Les applications sont multiples, et relatiement nombreuses dans la physique où la résolution de ce problème permet la simulation de plusieurs phénomènes.
+
+
+
+
+\section{Méthode des différences finies}
+
+\quad Développée en 1715 par Brook Taylor dans son ouvrage \emph{Methodus incrementorum directa et inversa}, la méthode des diffrences finies est un procédé courant utilisé pour approcher la solution d' équations différentielles. En résumé, on établit une grille de points généralement uniforme sur l'espace de recherche pour discrétiser le problème (le réduire à un nombre fini de pas), puis on réduit la distance entre les points pour approcher au maximum la solution.
+\quad Formellement, on utilise la formule de Taylor pour discrétiser les différentielles n-ièmes : on peut alors choisir la formule de Taylor-Young, ou la formule de Taylor avec reste intégral pour évaluer les erreurs (la discrétisation induit une approximation, qui engendre des erreurs).
+Dans le cas de Taylor-Young simple (on appellera ici de cette manière la formule de Taylor sans reste intégral), on a:
+$$
+f\relax(x_0 + h) = f\relax(x_0) + \sum_{\substack{0<i\le n}}\frac{f^{(i)}\relax(x_0)}{i!}h^i
+$$ 
+
+blablabla
+
+
+\quad Cette méthode permet donc de décomposer les équations différentielles ordinaires en un système d'équations linéaires, solvable en utilisant l'algèbre linéaire.
+
+
+\section{Résolution du problème en dimension 1}
+
+
+\section{Introduction à la résolution du problème en dimension 2}
+
+
+\section{Applications}
+
+\subsection{Conduction de la chaleur}
+
+\subsection{Déformation d'une corde élastique}
+
+\subsection{Problème stationnaire elliptique}
+
+\subsection{Problème hyperbolique}
+
+
+
+\end{document}

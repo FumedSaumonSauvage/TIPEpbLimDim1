@@ -1,0 +1,3 @@
+Trucs intéressants à bien lire avant de continuer:
+
+Equation de la chaleur avec problème aux limites : elementary differential equations and boundary value problems, p.530

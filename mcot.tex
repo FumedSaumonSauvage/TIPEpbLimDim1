@@ -1,0 +1,71 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Template for a LaTex article in English.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc} 
+%\usepackage[francais]{babel}
+
+%Dimensions
+\usepackage{geometry }
+\geometry{left=2cm,right=2cm,top=3.3cm,bottom=3.3cm}
+
+% AMS packages:
+\usepackage{amsmath, amsthm, amsfonts}
+
+% Theoremess
+%-----------------------------------------------------------------
+
+
+\newtheorem{theoreme}{Th{\'e}or{\`e}me}[section]
+\newtheorem{theoremedefinition}[theoreme]{Th{\'e}or{\`e}me et d{\'e}finition}
+\newtheorem{definitionproposition}[theoreme]{Définition et Proposition}
+\newcommand{\theoremeautorefname}{Th{\'e}or{\`e}me}
+\newtheorem{proposition}[theoreme]{Proposition}%[section]
+\newcommand{\propositionautorefname}{Proposition}
+\newtheorem{lemme}[theoreme]{Lemme}%[section]
+\newcommand{\lemmeautorefname}{Lemme}
+\newtheorem{corollaire}[theoreme]{Corollaire}%[section]
+\newcommand{\corollaireautorefname}{Corollaire}
+\newtheorem{definition}[theoreme]{D\'efinition} %[section]
+\newcommand{\definitionautorefname}{D\'efinition}
+\newtheorem{definitions}[theoreme]{D\'efinitions}%[section]
+\newtheorem{exemple}[theoreme]{Exemple}%[section]
+\newtheorem{exemples}[theoreme]{Exemples}%[section]
+\newtheorem{remarque}[theoreme]{Remarque}%[section]
+\newcommand{\remarqueautorefname}{Remarque}
+\newtheorem{remarques}[theoreme]{Remarques}%[section]
+\newtheorem{probleme}[theoreme]{Probl{\`e}me}%[section]
+\newtheorem{exercice}[theoreme]{Exercice}%[section]
+
+
+% Shortcuts.
+% One can define new commands to shorten frequently used
+% constructions. As an example, this defines the R and Z used
+% for the real and integer numbers.
+%-----------------------------------------------------------------
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+
+% Similarly, one can define commands that take arguments. In this
+% example we define a command for the absolute value.
+% -----------------------------------------------------------------
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+
+% Operators
+% New operators must defined as such to have them typeset
+% correctly. As an example we define the Jacobian:
+% -----------------------------------------------------------------
+\DeclareMathOperator{\Jac}{Jac}
+
+%-----------------------------------------------------------------
+\title{Ensemble et Suite de Sidon} % votre titre
+\author{Simon Sidon} % votre Prénom Nom
+
+
+\begin{document}
+	\maketitle
