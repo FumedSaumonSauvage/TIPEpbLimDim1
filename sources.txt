@@ -1,0 +1,11 @@
+Sources bibliographiques à intégrer au rapport
+
+
+Méthodes Numériques - Alfredo Quarteroni (sujet, efficace)
+Studies in advanced mathematics Dean G. Duffy - Green's Functions with Applications-Chapman & Hall_CRC (2001)
+Cours sur la méthode des différences finies de l'Université de Pau (mettre PDF avec? + bien mettre l'auteur)
+Greene's Function - Roach => Évidemment pour les fonctions de Greene
+Differential Equations with Boundary-Value Problems - Dennis G. Zill => superbe à partir de p.119
+Greens Functions and Boundary Value Problems, Third Edition - Ivar Stakgold, Michael J. Holst => autre regard plus intuitif sur greene p.52
+Elementary Differential Equations and Boundary Value Problems - William E. Boyce, Richard C. DiPrima => intéressant mais pas forcément utile, regarder de plus près
+Numerical Solutions of Boundary Value Problems for Ordinary Differential Equations => de la belle algorithmique comme on aime, masi pas forcément utile donc à vois s'il rentre
