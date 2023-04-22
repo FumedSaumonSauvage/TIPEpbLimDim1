@@ -48,6 +48,7 @@
 \newcommand{\C}{\mathbb C}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Z}{\mathbb Z}
+\newcommand{\espace}{\hspace{5mm}}
 
 % Similarly, one can define commands that take arguments. In this
 % example we define a command for the absolute value.
@@ -82,8 +83,22 @@ u(0) = u(1) = 0
 \begin{equation}
 	X'' + \alpha X = 0 \hspace{1cm} \forall X \in ]0,1[ , \forall \alpha \in \mathbb R*
 \end{equation}
-Les applications sont multiples, et relatiement nombreuses dans la physique où la résolution de ce problème permet la simulation de plusieurs phénomènes.
 
+\quad Nous pouvons alors écrire les solutions de (1) comme les fonctions de la forme
+\begin{equation}
+	u\relax(x) = c_1 + c_2 x - \int_0^x F(s) ds \espace c_1 , c_2 \in \R
+\end{equation}
+selon le théorème fondamental de l'Analyse, avec 
+\begin{equation}
+	F\relax(s) = \int_0^s f(t) dt
+\end{equation}
+\quad Nous verrons que l'on peut écrire $u$ sous la forme
+\begin{equation}
+	u\relax(x) = \int_0^1 G\relax(x, s) f\relax(s) ds \espace x \in [0, 1]
+\end{equation}
+ce qui nous permettra d'introduire avec $G$ le concept de \emph{Fonction de Greene}.
+
+Les applications du problème aux limites en dimension 1 sont multiples, et relativement nombreuses dans la physique où sa résolution permet la simulation de plusieurs phénomènes tels que la conduction de la chaleur, et les défomrations élastiques.
 
 
 
@@ -96,7 +111,17 @@ $$
 f\relax(x_0 + h) = f\relax(x_0) + \sum_{\substack{0<i\le n}}\frac{f^{(i)}\relax(x_0)}{i!}h^i
 $$ 
 
-blablabla
+\quad La méthode des différences finies sert à approximer la dérivée de certaines fonctions par des valeurs numériques, qui ne peut parfois pas être calculées par des méthodes formelles classiques. En effet, généralement les fonctions ne peuvent pas être formulées analytiquement ce qui rend le calcul de leurs dérivées impossible.
+\\
+\quad Pour appliquer la méthode des différences finies, on se place sur un segment $[0, \alpha]$ (on verra plus tard que dans le cas du problème aux limites en dimension 1, $\alpha = 1$)sur lequel on ajoute un pas de discrétisation $h$ et une suite de points $x_n | n\in [0, N]$ avec $Nh = \alpha$. Ici, le pas est uniforme mais il peut tout à fait être défini non uniformément sur chaque $x_i$ pour tout $i \in [0, N-1]$ comme $h_i$, avec $\sum_{\substack{0 \le i< N}}h_i = \alpha$. On appellera $x_n$ la \emph{grille}.
+\\
+\quad Posons une fonction régulière $u$ telle que: $u : [0, \alpha] \longrightarrow \R$, et on appellera $u_n$ l'évaluation de $u$ en chaque point $x_n$ de la grille. \\
+On appelle \emph{une différence finie à p points} une combinaison linéaire de $p$ $u_n$, servant à approximer au point $x_n$ les dérivées de $u$. Considérons $Du$ une différence finie, on dira qu'elle \emph{approche $u^{(l)}\relax(x_n)$ à l'ordre q} si :
+\begin{equation}
+\exists C>0, h_0 >0 \hspace{5mm}|\hspace{5mm} \forall h \in [0, h_0] \hspace{5mm} ||Du - u^{(l)}\relax(x_n)|| \le Ch^q
+\end{equation}
+
+
 
 
 \quad Cette méthode permet donc de décomposer les équations différentielles ordinaires en un système d'équations linéaires, solvable en utilisant l'algèbre linéaire.
