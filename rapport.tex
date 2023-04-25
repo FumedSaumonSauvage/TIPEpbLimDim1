@@ -2,10 +2,11 @@
 % Le template fourni a été utilisé pour rédiger cet article.
 
 
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc} 
 %\usepackage[francais]{babel}
 
+\usepackage{breqn}
 %Dimensions
 \usepackage{geometry }
 \geometry{left=2cm,right=2cm,top=3.3cm,bottom=3.3cm}
@@ -73,19 +74,20 @@
 
 \quad Cet article aura pour but de résumer les résultats et applications concernant les problèmes aux limites en dimension 1. Nous reviendrons sur la méthode des différences finies, fondant l'approximation des solutions des problèmes aux limites, et nous traiterons de plus quelques applications les plus courantes pour cette catégorie de problèmes. Éventuellement, nous verrons brièvement les méthodes de résolution de ces problèmes en dimension 2.
 Rappellons d'abord l'énoncé du modèle du problème aux limites en dimension 1:
-\begin{equation}
+\begin{equation}\label{probleme}
 -u''(x) = f(x) \hspace{1cm} \forall x \in ]0,1[ 
 \end{equation}
-\begin{equation}
+\begin{equation}\label{limites}
 u(0) = u(1) = 0
 \end{equation}
-\quad Ce problème est donc simplement caractérisé par l'équation (1), munie des conditions limites (2). Une partie importante lors de la résolution de ce problème est donc de trouver les valeurs propres et les fonctions propres (fonctions ne subissant qu'une transformation scalaire lors de leur utilisation comme solution) de l'équation différentielle
+\quad Ce problème est donc simplement caractérisé par l'équation \eqref{probleme} munie des conditions limites \eqref{limites}. Une partie importante lors de la résolution de ce problème est donc de trouver les valeurs propres et les fonctions propres (fonctions ne subissant qu'une transformation scalaire lors de leur utilisation comme solution) de l'équation différentielle
 \begin{equation}
 	X'' + \alpha X = 0 \hspace{1cm} \forall X \in ]0,1[ , \forall \alpha \in \mathbb R*
 \end{equation}
 
-\quad Nous pouvons alors écrire les solutions de (1) comme les fonctions de la forme
+\quad Nous pouvons alors écrire les solutions de \eqref{probleme} comme les fonctions de la forme
 \begin{equation}
+\label{solutionsNaives}
 	u\relax(x) = c_1 + c_2 x - \int_0^x F(s) ds \espace c_1 , c_2 \in \R
 \end{equation}
 selon le théorème fondamental de l'Analyse, avec 
@@ -129,13 +131,13 @@ On appelle \emph{une différence finie à p points} une combinaison linéaire de
 
 \section{Résolution du problème en dimension 1}
 
-\quad Revenons à l'introduction de cet article : nous avions vu que pour $u \in C^2 [0, 1]$ satisfaisant l'équation (1), on avait $u$ de la forme (4).  Pour retrouver la fonction de Greene, nous devons intégrer par parties $\int_0^x F\relax(s) ds$ : 
+\quad Revenons à l'introduction de cet article : nous avions vu que pour $u \in C^2 [0, 1]$ satisfaisant l'équation \eqref{probleme}, on avait $u$ de la forme \eqref{solutionsNaives}  Pour retrouver la fonction de Greene, nous devons intégrer par parties $\int_0^x F\relax(s) ds$ : 
 \begin{equation}
 \int_0^x F\relax(s) ds = [sF\relax(s)]_0^x - \int_0^x sF'\relax(s) ds = \int_0^x(x-s)f\relax(s)ds
 \end{equation}
 
-D'après (2), les constantes $c_1$ et $c_2$ sont respectivement égales à $0$ et $\int_0^1(1-s)f\relax(s)ds$.  On peut alors écrire $u$ sous la forme
-\begin{equation}
+D'après \eqref{limites}, les constantes $c_1$ et $c_2$ sont respectivement égales à $0$ et $\int_0^1(1-s)f\relax(s)ds$.  On peut alors écrire $u$ sous la forme
+\begin{equation} \label{introGreene}
 u\relax(x) = x \int_0^1(1-s)f\relax(s)ds - \int_0^x (x-s)f\relax(s)ds = \int_0^1 G\relax(x, s) f\relax(s) ds
 \end{equation}
 avec 
@@ -147,12 +149,78 @@ G\relax(x, s) = \left\{
     \end{array}
 \right.
 \end{equation}
-On remarquera qu'on a continuité de la fonction $G$ pour $s = x$, et que G est une fonction \emph{affine} de $x$ à $s$ fixé, et de $s$ à $x$ fixé. Elle se nomme \emph{Fonction de Greene} pour le problème aux limites défini par (1) et (2).
+On remarquera qu'on a continuité de la fonction $G$ pour $s = x$, et que G est une fonction \emph{affine} de $x$ à $s$ fixé, et de $s$ à $x$ fixé. Elle se nomme \emph{Fonction de Greene} pour le problème aux limites défini par \eqref{probleme} et \eqref{limites}.
 
-\subsection{Fonction de Greene}
-\quad La fonction de Greene est continue et symétrique sur $[0,1]^2$, ainsi que positive non strictement ($G(x,s) = 0 \Longleftrightarrow x = 0 \lor s = 0$). Son existence dans le problème générique (1) (nous verrons plus tard des applications précises du problème comme la déformation d'une corde élastique) est assurée par sa définition sur tout l'intervalle entre les limites (dans notre cas, (2) mais on pourrait fixer d'autres limites). \\ \\
-\quad On voit alors que lorsque $G$ existe et qu'elle est connue formellement, on peut écrire explicitement les soutions du problème aux limites dans une forme très simple.  Un des principaux avantages de la représentation (9) des solutions du problème est qu'elle élimine la dépendance au terme $f(s)$, qui n'est dépendant que de l'équation différentielle en (1) et des limites qui nous sont imposées : une fois que l'on aura déterminé $G$, les solutions seront connues selon $f(s)$ pour peu pqu'on puisse écrire les solutions sous la forme (9). Nous verrons dans les applications que cette forme n'est pas forcément admissible sous toutes les conditions. \\
-\quad De plus, la forme intégrale (9) est bien plus propice à l'analyse numérique que l'équation différentielle (1), ce qui rend le traitement par ordinateur bien plus simple et efficace.
+
+\quad La fonction de Greene est continue et symétrique sur $[0,1]^2$, ainsi que positive non strictement ($G(x,s) = 0 \Longleftrightarrow x = 0 \lor s = 0$). Son existence dans le problème générique \eqref{probleme} (nous verrons plus tard des applications précises du problème comme la déformation d'une corde élastique) est assurée par sa définition sur tout l'intervalle entre les limites (dans notre cas, \eqref{limites} mais on pourrait fixer d'autres limites). \\
+\quad On voit alors que lorsque $G$ existe et qu'elle est connue formellement, on peut écrire explicitement les soutions du problème aux limites dans une forme très simple.  Un des principaux avantages de la représentation \eqref{introGreene} des solutions du problème est qu'elle élimine la dépendance au terme $f(s)$, qui n'est dépendant que de l'équation différentielle en \eqref{probleme} et des limites qui nous sont imposées : une fois que l'on aura déterminé $G$, les solutions seront connues selon $f(s)$ pour peu pqu'on puisse écrire les solutions sous la forme \eqref{introGreene}. Nous verrons dans les applications que cette forme n'est pas forcément admissible sous toutes les conditions. \\
+\quad De plus, la forme intégrale \eqref{introGreene} est bien plus propice à l'analyse numérique que l'équation différentielle \eqref{probleme}, ce qui rend le traitement par ordinateur bien plus simple et efficace. Les motivations principales sont donc de passer d'une recherche de $u$ à une recherche de $G$ : il faut alors trouver un moyen d'exprimer $G$ sans avoir à résoudre l'équation \eqref{probleme}.\\
+Nous pouvons alors lister quelques propriétés de la fonction de Greene, qui nous seront utiles par la suite dans la résolution du problème:
+\begin{enumerate}
+  \item $G$ satisfait l'équation homogène de  \eqref{probleme}:
+	\begin{equation}
+		G'' = 0
+	\end{equation}
+	sur les intervalles $0 \le s < x$ et $x < s \le L$ avec dans notre cas L = 1. Généralement, on a bien continuité en $s = x$, nous le prouverons dans le cas du problème de l'élasticité d'une corde. (ou pas? Remettre la démo éventuellement)
+  \item $G(x, 0) = G(x, L)$, elle satisfait donc les conditions limites \eqref{limites}.
+  \item $G(x,s) = G(s, x)$, G est symétrique sur ses arguments.
+\end{enumerate}
+
+A partir de ces propriétés, nous pouvons commencer la résolution du problème aux limites en supposant l'existence d'une fonction de Greene $G$. Si cette supposition est valide, alors nous pouvons retrouver \eqref{introGreene} depuis \eqref {probleme}, ainsi que ses propriétés listées précédemment.  En effet,  d'après \eqref{probleme}, après une multiplication des deux côtés par $G$ nous pouvons intégrer comme suit:
+\begin{equation}
+\int_0^1 u'' G(x,s) dx = - \int_0^1 f(x) G(x,s) dx
+\end{equation}
+avec comme seule supposition la continuité lorsque $s \rightarrow x$. Pour être plus formel, nous pouvons exclure de l'intervalle d'intégration le point $x = s$ et éviter toute intégrale impropre.
+\begin{equation} \label{separation}
+\int_0^1 u'' G(x,s) dx = \lim_{\epsilon \to s^- } \int_0^\epsilon u'' G(x,s) dx + \lim_{\eta \to s^+ } \int_\eta^1 u'' G(x,s) dx
+\end{equation}
+
+En intégrant deux fois par parties les deux intégrales à droite,  nous avons:
+\begin{equation}
+\int_0^\epsilon u'' G(x,s) dx = [Gu' - G'u]_0^\epsilon + \int_0^\epsilon u G''(x,s) dx
+\end{equation}
+\begin{equation}
+\int_\eta^1 u'' G(x,s) dx = [Gu' - G'u]_0^\epsilon + \int_\eta^1 u G''(x,s) dx
+\end{equation}
+Or, en choisissant $G(x,s)$ de manière à satisfaire $G'' = 0$ en tant que fonction de x dans les intervalles des intégrales ($[0, \epsilon] \cup [\eta, 1]$), alors les intégrales à droite sont nulles. En ajoutant les termes restants (qu'on avait enlevés afin d'éviter les intégrales impropres), on revient en supposant $G$ symétrique à:
+\begin{dmath}
+-\int_0^1 f(x)G(x, s) dx = (G(s, s^- ) u'(s^-) - G'(s, s^- ) u(s^-) - G(0, s ) u'(0) + G(1, s ) u'(1) - G(s, s^+ ) u'(s^+) + G'(s, s^+ ) u(s^+))
+\end{dmath}
+
+En supposant que $G$ vérifie les conditions limites et que $u$ est continu en $s$,  nous pouvons écrire: 
+\begin{equation}
+\int_0^1 f(x)G(x, s) dx = - u(y) (G'(s, s^+ ) - G'(s, s^- ))  + u'(s)( G(s, s^+ ) - G(s, s^- ))
+\end{equation}
+
+De plus,  $G$ est continue en $x=s$, tandis que $g'$ y est discontinue. Nous aurons besoin de cette proposition pour continuer, nous allons la démontrer. \\
+À partir de \eqref{probleme}, nous pouvons utiliser la méthode de la variation des variables pour supposer que, si le problème existe, alors les solutions seront de la forme 
+\begin{equation} \label{solutionBasique}
+u(x) = A(x) cos(kx) + B(x) sin(kx).
+\end{equation}
+En dérivant deux fois selon x et en supposant qu'on ait $A'(x) cos (kx) + B'(x) sin(kx) = 0$, on trouve que \eqref{solutionBasique} constitue effectivement une solution, à la condition
+\begin{equation} \label{resoudre}
+-kA' sin(kx) + kB' cos(kx) = -f(x)
+\end{equation}
+En résolvant \eqref{resoudre} accompagné de sa condition présupposée, nous pouvons alors exprimer $A'$ et $B'$:
+\begin{equation}
+A'(x) = \frac{f(x) sin(kx)}{k}
+\end{equation}
+\begin{equation}
+B'(x) = \frac{-f(x) cos(kx)}{k}
+\end{equation}
+
+Nous pouvons alors écrire la solution de \eqref{probleme} comme:
+\begin{equation}
+u(x) = \frac{cos(kx)}{k} \int_{c_1}^x f(s) sin (ks) ds - \frac{sin(kx)}{k} \int_{c_2}^x f(s) cos (ks) ds
+\end{equation}
+avec $c_1, c_2$ constantes bien choisies pour satisfaire les conditions \eqref{limites}.
+
+
+
+
+
+
+
 
 
 
