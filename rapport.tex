@@ -188,11 +188,13 @@ Or, en choisissant $G(x,s)$ de manière à satisfaire $G'' = 0$ en tant que fonc
 \end{dmath}
 
 En supposant que $G$ vérifie les conditions limites et que $u$ est continu en $s$,  nous pouvons écrire: 
-\begin{equation}
+\begin{equation} \label{dernierRempartDeLEncadre}
 \int_0^1 f(x)G(x, s) dx = - u(y) (G'(s, s^+ ) - G'(s, s^- ))  + u'(s)( G(s, s^+ ) - G(s, s^- ))
 \end{equation}
 
-De plus,  $G$ est continue en $x=s$, tandis que $g'$ y est discontinue. Nous aurons besoin de cette proposition pour continuer, nous allons la démontrer. \\
+
+%METTRE TOUT CA DANS UN ENCADRÉ
+De plus,  $G$ est continue en $x=s$, tandis que $G'$ y est discontinue. Nous aurons besoin de cette proposition pour continuer, nous allons la démontrer. \\
 À partir de \eqref{probleme}, nous pouvons utiliser la méthode de la variation des variables pour supposer que, si le problème existe, alors les solutions seront de la forme 
 \begin{equation} \label{solutionBasique}
 u(x) = A(x) cos(kx) + B(x) sin(kx).
@@ -213,7 +215,31 @@ Nous pouvons alors écrire la solution de \eqref{probleme} comme:
 \begin{equation}
 u(x) = \frac{cos(kx)}{k} \int_{c_1}^x f(s) sin (ks) ds - \frac{sin(kx)}{k} \int_{c_2}^x f(s) cos (ks) ds
 \end{equation}
-avec $c_1, c_2$ constantes bien choisies pour satisfaire les conditions \eqref{limites}.
+avec $c_1, c_2$ constantes bien choisies pour satisfaire les conditions \eqref{limites}. En utilisant la condition en 0 de \eqref{limites}, on trouve $c_1 = 0$. De même, la condition en 1 implique
+\begin{equation}
+u(x) = \frac{1}{k} \int_0^x f(s) sin (k(s-x)) ds - \frac{sin(kx)}{k sin(kl)} \int_x^1 f(s) sin(k(s-1) ds
+\end{equation}
+ce qui nous donne enfin
+\begin{dmath}
+u(x) =  \int_0^x\frac{sin(ks) sin(k(1-x))}{k sin(k)}ds + \int_x^1 f(s) \frac{sin(kx) sin(k(1-s))}{k sin(kl)} ds = \int_0^1 f(s) G(x,s) ds
+\end{dmath}
+qui revient au même pour introduire la fonction de Greene, de manière bien détaillée cette fois. On a par la même occasion montré la consistance du problème aux limites (revoir la def!!!!). \\
+Finalement, nous aboutissons à une forme de $G$ intéressante:
+\begin{equation}
+G(x, s) = \frac{sin(ky) sin(k(1-x)}{k sin(k)} \espace s\in [0, x] 
+\end{equation}
+\begin{equation}
+G(x, s) = \frac{sin(kx) sin(k(1-s)}{k sin(k)} \espace s\in [x,1]
+\end{equation}
+
+À partir d'ici, nous pouvons vérifier aisément que la fonction $G$ est continue en $s=x$, et que sa dérivée est discontinue en ce même point.
+%FIN DE L'ENCADRÉ
+\\
+Depuis \eqref{dernierRempartDeLEncadre}, nous pouvons alors conclure que
+\begin{equation}
+u(s) = \int_0^1 f(x)G(x, s) ds
+\end{equation}
+et nous obtenons alors une représentation désirable de la solution duproblème aux limites par une fonction $G$. Cette fonction vérifie tous les axiomes de la fonction de Greene énoncés auparavant, nous avons donc établi une méthode pour retrouver la solution des problèmes aux limites d'une manière relativement directe. Néanmoins, cette méthode suppose que nous connaissions la fonction $G$.
 
 
 
