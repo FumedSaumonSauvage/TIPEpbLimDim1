@@ -151,7 +151,7 @@ G\relax(x, s) = \left\{
 \end{equation}
 On remarquera qu'on a continuité de la fonction $G$ pour $s = x$, et que G est une fonction \emph{affine} de $x$ à $s$ fixé, et de $s$ à $x$ fixé. Elle se nomme \emph{Fonction de Greene} pour le problème aux limites défini par \eqref{probleme} et \eqref{limites}.
 
-
+\subsection{L'histoire avec Greene}
 \quad La fonction de Greene est continue et symétrique sur $[0,1]^2$, ainsi que positive non strictement ($G(x,s) = 0 \Longleftrightarrow x = 0 \lor s = 0$). Son existence dans le problème générique \eqref{probleme} (nous verrons plus tard des applications précises du problème comme la déformation d'une corde élastique) est assurée par sa définition sur tout l'intervalle entre les limites (dans notre cas, \eqref{limites} mais on pourrait fixer d'autres limites). \\
 \quad On voit alors que lorsque $G$ existe et qu'elle est connue formellement, on peut écrire explicitement les soutions du problème aux limites dans une forme très simple.  Un des principaux avantages de la représentation \eqref{introGreene} des solutions du problème est qu'elle élimine la dépendance au terme $f(s)$, qui n'est dépendant que de l'équation différentielle en \eqref{probleme} et des limites qui nous sont imposées : une fois que l'on aura déterminé $G$, les solutions seront connues selon $f(s)$ pour peu pqu'on puisse écrire les solutions sous la forme \eqref{introGreene}. Nous verrons dans les applications que cette forme n'est pas forcément admissible sous toutes les conditions. \\
 \quad De plus, la forme intégrale \eqref{introGreene} est bien plus propice à l'analyse numérique que l'équation différentielle \eqref{probleme}, ce qui rend le traitement par ordinateur bien plus simple et efficace. Les motivations principales sont donc de passer d'une recherche de $u$ à une recherche de $G$ : il faut alors trouver un moyen d'exprimer $G$ sans avoir à résoudre l'équation \eqref{probleme}.\\
@@ -240,6 +240,16 @@ Depuis \eqref{dernierRempartDeLEncadre}, nous pouvons alors conclure que
 u(s) = \int_0^1 f(x)G(x, s) ds
 \end{equation}
 et nous obtenons alors une représentation désirable de la solution duproblème aux limites par une fonction $G$. Cette fonction vérifie tous les axiomes de la fonction de Greene énoncés auparavant, nous avons donc établi une méthode pour retrouver la solution des problèmes aux limites d'une manière relativement directe. Néanmoins, cette méthode suppose que nous connaissions la fonction $G$.
+
+\subsection{Suite de la resolution}
+
+Remettre ici la suite de la méthode des différences finies, ou la redéfinir dans la section précédente.
+
+Nous allos ensuite analyser la stabilité du problème, en utilisant la méthod ede l'énergie (stabilité : capacité de l'algo à ne pas amplifier les erreurs et à produire des résultats cohérents, mettre la def). On cherche à montrer que la solution est bornée en partant d'une valeur initiale du problème, et que la méthode des différences finies permettra de s'ens approcher
+
+Continuer avec l'analyse de la convergence des solutions : regarder dans un autre bouquin pour changer?
+
+Si place, regarder les différences finies pour la résolution de problèmes à coefs variables; sinon, on s'en tape.
 
 
 
