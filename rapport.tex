@@ -124,9 +124,13 @@ On appelle \emph{une différence finie à p points} une combinaison linéaire de
 \end{equation}
 
 
+%différences finies : voir alfredo quarteroni page 360
+
 
 
 \quad Cette méthode permet donc de décomposer les équations différentielles ordinaires en un système d'équations linéaires, solvable en utilisant l'algèbre linéaire.
+
+
 
 
 \section{Résolution du problème en dimension 1}
@@ -241,7 +245,37 @@ u(s) = \int_0^1 f(x)G(x, s) ds
 \end{equation}
 et nous obtenons alors une représentation désirable de la solution duproblème aux limites par une fonction $G$. Cette fonction vérifie tous les axiomes de la fonction de Greene énoncés auparavant, nous avons donc établi une méthode pour retrouver la solution des problèmes aux limites d'une manière relativement directe. Néanmoins, cette méthode suppose que nous connaissions la fonction $G$.
 
-\subsection{Suite de la resolution}
+\subsection{Suite de la resolution : approximation par différences finies}
+
+Sur la grille des points $(x_j)_{j = 0}^n$ de pas uniforme $h$ (on a donc $x_j = jh$) sur $[0,1]$, l'approximation de la solution est une suite finie $(u_j)_{j = 0]}^n$ telle que:
+\begin{equation} \label{diffsFiniesProbleme}
+	- \frac{u_{j+1} - 2u_j + u_{j-1}}{h^2} = f(x_j) \espace j \in [[1, n-1]]
+\end{equation} 
+avec $u_i = 0$ aux points $0$ et $n$. On a alors $u_j$ approche $u(x_j)$, la valeur de chaque point de la grille. Pour s'en convaincre, on se réfèrera à ... dans la partie traitent des différences finies centrées, en remplaçant $u''(x)$ par son approximation du 2nd ordre.
+
+On posera $u = <u_1, ..., u_n-1>$ et $f = <f_1, ..., f_n-1>$ vecteurs avec $f_i = f(x_i)$, en utilisant une notation empruntée au C++. Nous pouvons alors voir que \eqref{diffsFiniesProbleme} peut s'écrire comme
+\begin{equation} \label{turboCompact}
+	A_{df}u = f
+\end{equation}
+avec $A_{df}$ matrice carrée de différences finies de taille $(n-1)$ définie par
+\begin{equation}
+	A_{fd} = h^{-2} tridiag_{n-1} (-1, 2, -1)
+\end{equation}
+Elle est à diagonale dominante par ligne, et définie positive (démontrable).
+
+Alors, l'équation \eqref{turboCompact} n'admet qu'une unique solution.\\ Définissons les M-Matrices comme suit : une M-Matice est une matrice carrée inversible avec tous ses coefficients non sur la diagonale négatifs ou nuls, ainsi que tous les coefficients de son inverse sont positifs ou nuls.
+Nous pouvons noter que $A_{df}$ est une M-Matrice, ce qui permet de satisfaire la condition de monotonie de la solution exacte $u(x)$ : nous avons alors $f >0 \Longrightarrow u>0$ (propriété du \emph{maximum discret}).
+
+Le but est maintenant de réécrire \eqref{diffsFiniesProbleme}. Pour cela, nous pouvons considérer $V_h$ ensemble de fonctions discrètes définies sur les $x_j$ points de la grille. Pour tout $v_h$ dans $V_h$, elle est alors définie en tout point de la grille, et $v_j = v_h(x_j)$.\\ On posera de plus $V_h^0 = \{v_h \in V_h | v_0 = v_n = 0\}$.
+On pourra définir $L_h$ comme
+\begin{equation}
+	(L_h v_h)(x_j) = - \frac{v_{j+1} - 2v_j + w_{j-1}}{h^2} \espace \espace v_h \in V_h \espace j \in [[1, n-1]]
+\end{equation}
+On peut alors encore réécrire le problème \eqref{diffsFiniesProbleme} comme:
+\begin{equation}
+	(L_h u_h)(x_j) = f(x_j) \espace j \in [[1, n-1]]
+\end{equation}
+en cherchant $u_h \in V_h^0$ : on prend en compte les conditions limites.
 
 Remettre ici la suite de la méthode des différences finies, ou la redéfinir dans la section précédente.
 
