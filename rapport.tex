@@ -272,14 +272,54 @@ On pourra définir $L_h$ comme
 	(L_h v_h)(x_j) = - \frac{v_{j+1} - 2v_j + w_{j-1}}{h^2} \espace \espace v_h \in V_h \espace j \in [[1, n-1]]
 \end{equation}
 On peut alors encore réécrire le problème \eqref{diffsFiniesProbleme} comme:
-\begin{equation}
+\begin{equation} \label{diffFiniesAvecL}
 	(L_h u_h)(x_j) = f(x_j) \espace j \in [[1, n-1]]
 \end{equation}
 en cherchant $u_h \in V_h^0$ : on prend en compte les conditions limites.
 
-Remettre ici la suite de la méthode des différences finies, ou la redéfinir dans la section précédente.
+%analyse de la stabilité
+\subsection{Analyse de la stabilité}
+Nous allons maintenant analyser la \emph{stabilité} du problème. On peut définir la stabilité par la capacité de l'algorithme de résolution à ne pas amplifier les erreurs, et à produire des résultats cohérents. Ici, vous allons essayer de montrer que la solution renvoyée en appliquant la méthode des différences finies au problème est bornée par une des variables d'entrées.
 
-Nous allos ensuite analyser la stabilité du problème, en utilisant la méthod ede l'énergie (stabilité : capacité de l'algo à ne pas amplifier les erreurs et à produire des résultats cohérents, mettre la def). On cherche à montrer que la solution est bornée en partant d'une valeur initiale du problème, et que la méthode des différences finies permettra de s'ens approcher
+Pour cela, nous aurons besoin de quelques notions supplémentaires. Nous définirons le \emph{produit scalaire discret} comme
+\begin{equation} \label{produitScalaireDiscret}
+	(w_h, v_h)_h = h \sum_{k = 0}^n c_k w_k v_k \espace \forall v_h, w_h \in V_h
+\end{equation}
+avec $c_i= 1 \forall i \in [[1, n-1]]$ et $c_0 = c_n = 1/2$. On peut retrouver le produit scalaire discret par différences finies, avec la \emph{formule composite du trapèze} (voir partie sur les différences finies). On peut alors définir une norme sur $V_h$ par la racine du produit scalaire d'un opérateur de $V_h$ avec lui même.
+
+Nous pouvons alors émettre plusieurs propriétés sur ce produit scalaire. Tout d'abord, il est symétrique et défini positif pour l'opérateur $L_h$ dans $V_h^0$:
+\begin{equation}
+	(L_h w_h, v_h)_h = (v_h, L_h w_h)_h \espace (L_h v_h, v_h)_h \ge 0 (0 \Leftrightarrow v_h = 0)
+\end{equation}
+(démonstration possible)
+
+On définit la norme $|||.|||_h$ sur $V_h^0$ par:
+\begin{equation}
+	|||v_h||| = \left\{ h \sum_{j = 0}^{n-1} ( \frac{v_{j+1} - v_j}{h})^2 \right\} ^{1/2}
+ \end{equation}
+On peut alors constater que
+\begin{equation}
+	(L_h v_h)_h = |||v_h|||^2_h \espace \forall v_h \in V^0_h
+\end{equation}
+
+De plus, on a:
+\begin{equation} \label{majorationNorme}
+	||v_h||_h^2 \le \frac{1}{\sqrt{2}} |||v_h||||_h \espace \forall v_h \in V_h^0
+\end{equation}
+(démonstration possible, on utilise l'inégalité de Minkowski en repartant de la définition des $v_j$)\\
+De même, on peut écrire la version discrète de \emph{l'inégalité de poincaré}: en notant $v_h^{(1)}$ la fonction discrète de $v_h$ dans $V_h^0$ prenant ses valeurs sur la grille par $(v_{j+1}-v_j)/h$ avec $j \in [[0, n-1]]$, on peut la voir commme la dérivée discrète de $v_h$.\\
+On peut alors écrire l'inégalité comme
+\begin{equation}
+	||v_h||_h \le \frac{1}{\sqrt{2}} ||v_h^{(1)}||_h \forall v_h \in V_h^0
+\end{equation}
+
+À partir de \eqref{majorationNorme}, on peut multiplier chaque équation par \eqref{diffFiniesAvecL} pour avoir
+\begin{equation}
+	(L_h u_h , u_h )_h = (f, u_h)_h
+\end{equation}
+
+
+
 
 Continuer avec l'analyse de la convergence des solutions : regarder dans un autre bouquin pour changer?
 
