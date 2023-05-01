@@ -15,6 +15,8 @@
 % AMS packages:
 \usepackage{amsmath, amsthm, amsfonts}
 
+\usepackage{hyperref}
+
 % Theoremess
 %-----------------------------------------------------------------
 
@@ -50,6 +52,7 @@
 \newcommand{\C}{\mathbb C}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Z}{\mathbb Z}
+\newcommand{\espace}{\hspace{5mm}}
 
 % Similarly, one can define commands that take arguments. In this
 % example we define a command for the absolute value.
@@ -63,9 +66,77 @@
 \DeclareMathOperator{\Jac}{Jac}
 
 %-----------------------------------------------------------------
-\title{Ensemble et Suite de Sidon} % votre titre
-\author{Simon Sidon} % votre Prénom Nom
+\title{Problèmes aux limites en dimension 1} % votre titre
+\author{Simon Hergott} % votre Prénom Nom
 
 
 \begin{document}
 	\maketitle
+	
+\section{Abstract}
+
+In this documentary research article, we will study boundary values problems in one dimension, and eventually give some clues for the second dimension. Boundary value problems are defined by a differential equation and a set of boundaries the solution needs to meet.  Its resolution in one dimension can be done for functions of one or more variables (p-variables differential equation), and is a key element to solve many physics problems such as heat conduction in a metal rod.
+To solve this problem, we will need to introduce some other concepts, such as the finite differences method to approximate the solutions of a differential equation, and Green's function to get solutions the less dependent possible to the problem.
+
+\section{Mots-clés}
+
+\begin{itemize}
+	\item BVP (Boundary Value Problem :  \emph{Problème aux limites}
+	\item Green's function : \emph{fonction de Green}
+	\item Finite differences (method) : \emph{(méthode des) différences finies}
+\end{itemize}
+	
+\section{Bibliographie commentée}
+
+\quad Nous devrons premièrement définir le problème aux limites en dimension 1: ici, nous utiliserons la définition trouvée notamment dans \cite{1}:
+\begin{equation}
+-u''(x) = f(x) \forall x \in [0,1] \espace u(0) = u(1)  =0
+\end{equation}
+Plusieurs autres définitions sont possibles, comme notamment dans \cite{2} où on ajoute $k^2 u$ au membre de gauche de l'équation différentielle, ainsi que $x$ peut se trouver sur n'importe quel intervalle $[0,L]$ et n'est plus contraint à $[0,1]$.
+
+
+\quad Dans la résolution du problème aux limites la méthode des différences finies est utilisée pour trouver numériquement une solution (ou plus précisément, l' \emph{approximer}). Nous passerons alors rapidement sur la méthode des différences finies, en définissant dans notre cas une \emph{grille} de points sur laquelle résoudre le problème.
+Nous définirons cette grille suivant \cite{1} telle qu'un ensemble de points $(x_j)_{j = 0}^n$ répartis avec un \emph{pas} $h$ sur $[0,1]$. \\
+Pour développer sur les différences finies, nous nous aiderons de \cite{3}, particulièrement compréhensible, ainsi que de \cite{5} éventuellement.
+
+\quad La résolution du problème nous amènera à utiliser la fonction de Green : elle peut être définie comme 
+\begin{equation}
+G\relax(x, s) = \left\{
+    \begin{array}{ll}
+        s(1-x) \espace s\in [0,x] \\
+        x(1-s) \espace s\in [x, 1]
+    \end{array}
+\right.
+\end{equation}
+avec $x,s \in [0,1]$. Nous utiliserons les définitions de \cite{1} et {2}, la seconde permettant de vérifier que $G$ est bien une solution du problème, et qu'elle possède toutes les propriétés nécessaires pour être cohérente dans ce contexte. Cette fonction est particulièreme,t intéressante, car en écrivant $u(x) = \int_0^1 G\relax(x, s) f\relax(s) ds$ nous pouvons rendre les solutions du problème dépendantes exclusivement de $G$ et $f$. Nous étudierons la fonction de Green sur son intervalle $[0,1]^2$ pour continuer la recherche de solutions: nous utiliserons alors \cite{6}.
+
+\quad Éventuellement, nous passerons rapidement sur la résolution en dimension 2 du problème, présente dans \cite{1} et appliquée dans \cite{5}.
+
+\quad Ce problème étant très utilisé en physique, nous passerons en revue quelques unes de ces applications à travers la conduction de la chaleur,  exemple très courant et présenté notamment dans \cite{5} et \cite{7}.
+De plus, nous verrons aussi la déformation d'une corde élastique à travers les applications de l'analyse de Fourier de \cite{7}, ainsi que le problème elliptique et le problème hyperbolique, qui sont deux utilisation du problème aux limites avec des équations différentielles partielles \cite{6}.
+
+\section{Répartition du travail}
+\quad Comme vous l'aurez constaté en lisant l'auteur, je suis seul.\\
+Suivre la progression du rapport : \href{https://github.com/FumedSaumonSauvage/TIPEpbLimDim1}{https://github.com/FumedSaumonSauvage/TIPEpbLimDim1}
+
+
+	
+\begin{thebibliography}{Bibliographie}
+ 
+\bibitem{1} Alfio Quarteroni, Riccardo Sacco, Fausto Saleri.Méthodes Numériques, \emph{Springer}2007, p. 369--452.
+
+
+\bibitem{2}G.F.Roach. Green's functions,\emph{Cambridge University Press}, 1982, p.1--8
+
+\bibitem{3}Sebastien Tordeux, Victor Peron. Methode des différences finies,\emph{Université de Pau}, 2020, p.1--48
+
+\bibitem{4}Dean G.Duffy. Studies in advanced mathematics - Green's functions with applications,\emph{Chapman \& Hall}, 2001, p.13--242
+
+\bibitem{5}Dennis.G.Zill. Differential equations with Boundary-Value-Problems, \emph{Cengage}, 2013, p.471--484
+
+\bibitem{6}Ivar Stakgold, Michael Holst.Green's Function and Boundary-value-Problems, \emph{Wiley}, 2011, p.471--484 %vérifier si on le garde celui ci
+
+\bibitem{7}Murray R.Spiegel. Fourier Analysis with applications to boundary value problems,\emph{McGraw-Hill}, 1974, p.1--19 %Pas cité mais pas grave
+  
+ \end{thebibliography}
+\end{document}
