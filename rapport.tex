@@ -130,6 +130,88 @@ On appelle \emph{une différence finie à p points} une combinaison linéaire de
 
 \quad Cette méthode permet donc de décomposer les équations différentielles ordinaires en un système d'équations linéaires, solvable en utilisant l'algèbre linéaire.
 
+\subsection{Un exemple : la méthode d'Euler}
+
+\quad Nous nous focaliserons maintenant sur un exemple pour définir la stabilité des méthodes numériques en général : nous utiliserons la méthode d'Euler, aussi appellée \emph{méthode de la tangente}.  Pour cela, nous poserons le problème à valeur initiale
+\begin{equation} \label{problemevaleurinitiale}
+\frac{dy}{dt} = f(t,y)
+\end{equation}
+avec la condition initiale
+\begin{equation} \label{condInitPVI}
+y(t_0) = y_0
+\end{equation}
+Nous pouvons remarque que ce problème ressemble fortement au problème aux limites, sauf qu'ici il n'y en a qu'une. Dans Méthodes Numériques d'Alfio Quarteroni, cet exemple est utilisé en donnant $\frac{dy}{dt} = 0$, la résolution reste la même.
+\quad Nous supposerons ici que les fonctions $f$ et $y$ sont continues dans le compact contenant le point $(t_0, y_0)$ Nous savons alors qu'il existe une solution ans un certain intervalle autour de $t_0$.  Nous supposerons la la solution est unique, en partant du principe que la fonction $f$ est linéaire sans quoi l'intervalle pourrait être difficile à déterminer. 
+
+\quad La méthode d'Euler est relativement simple : si on réécrit l'équation \eqref{problemevaleurinitiale} au point $t_n$ (toujours dans le compact de définition), nous pouvons arriver à la forme
+\begin{equation}
+\frac{d\phi}{dt}(t_n) = f(t_n, \phi(t_n))
+\end{equation}
+qui nous permet de la réécrire par le quotient de la différence aux points $t_{n+1}$ et $t_n$:
+\begin{equation}
+\frac{\phi (t_{n+1}) - \phi(t_n)}{t_{n+1} - t_n} \approx f(t_n, \phi (t_n))
+\end{equation}
+Enfin, en remplaçant $\phi$ par $y$ et en notant $y(t_n) = y_n$, nous pouvons écrire
+\begin{equation}
+y_{n+1} = y_n + f(t_n, y_n)(t_{n+1} - t_n) \espace \forall n \in \N
+\end{equation}
+qui, en supposant le pas uniforme et de valeur $h$ se simplifie en
+\begin{equation} \label{eulerSimple}
+y_{n+1} = y_n + h*f_n \espace \forall n \in \N
+\end{equation}
+La méthode d'Euler consiste à calculer l'équation \eqref{eulerSimple} en boucle en utilisant le résultat de l'étape précédente pour la nouvelle évaluation. L'algorithme est très simple, et nous pouvons dès à présent constater qu'il est extrêmement important d'éviter l'amplification d'erreurs d'étape en étape, en évaluant leur propagation.
+Afin de comprendre les erreurs apparaissant lors de l'utilisation de méthodes numériques d'approximation, nous allons voir quelques méthodes alternatives pour voir la méthode d'Euler sous un autre angle.
+Plusieurs méthodes sont possibles pour y parvenir, l'une d'entre elles est d'écrire le problème \eqref{problemevaleurinitiale} sous la forme d'une intégrale.En supposant $y = \phi(t)$ la solution de notre problème en satisfant la condition \eqref{condInitPVI}, nous avons
+\begin{equation}
+\int_{t_n}^{t_{n+1}} \phi ' (t) dt = \int_{t_n}^{t_{n+1}} f(t, \phi(t)) dt
+\end{equation}
+ce qui revient à dire 
+\begin{equation} \label{formeJolie}
+\phi(t_{n+1}) = \phi(t_n) + \int_{t_n}^{t_{n+1}} f(t, \phi(t)) dt
+\end{equation}
+L'intégrale de l'équation ci dessus \eqref{formeJolie} peut être représentée graphiquement comme l'aire sous la courbe de $f$ entre $t_n$ et $t_{n+1}$. En approwimant $f$ par sa fonction discrète en posant $f(t, \phi(t)) \approx f(t_n, \phi(t_n))$ et en gardant l'hypothèse que nous sommes sur une \emph{grille} (si ce concept n'a pas encore été défini, il le sera tout à l'heure) de pas uniforme $h$, nous avons alors:
+\begin{equation}
+\phi(t_{n+1}) \approx \phi(t_n) + hf(t_n, \phi(t_n))
+\end{equation}
+
+\quad Une autre approche consiste à supposer que la solution $\phi(t)$ est développaple au sens de Taylor (en série de Taylor) en $t_n$:
+\begin{equation}
+\phi (t_n + h) = \phi (t_n) + \phi'(t–n)h + \phi''(t_n) \frac{h^2}{2!} + ...
+\end{equation}
+Cette expression suppose que le développement de Taylor comprend plus que 2 termes, sinon nous aurions retrouvé une écriture précédente de la formule d'Euler.
+
+\quad L'utilisation de méthodes numériques telles que la formule d'Euler engendre des erreurs, qui doivent être identifiées et dont l'importance doit être vérifiée avant de pouvoir utiliser la solution approximée comme satisfaisante. En effet, un problème se pose pour la \emph{convergence} de la solution : lorsque le pas $h$ (en supposant qu'il soit uniforme, sinon considérer la distance entre les points de la grille) tend vers 0, est ce que al distance entre les solutions approximéees $y_n$ en les points $t_n$ tend vers 0? Et approchent-elles les véritables solutions du problème?
+Même en répondant à ces questions, nous pouvons encore nous demander avec quelle vitesse les solutions convergent-elles ; reformulé, à quel niveau de précision sur $h$ faut-il aller afin de garantir une certaine marge d'erreur maximum? Certains effets de bord peuvent aussi ne pas être évidents : la diminution de la taille du pas afin de garantir une meilleure précision pourrait causer de plus grandes erreurs, qui annuleraient tout bénéfice.
+
+Il y a un certain nombre de sources fondamentales d'erreurs dans l'approximation numérique d'un problème de valeur initiale (ce qui s'étend aux problèmes aux limites):
+\begin{enumerate}
+ 	\item La formule est une approximation, donc source d'erreur. Dans le cas de la méthode d'Euler, la solution est approximée par une ligne droite en lieu et place de la courbe.
+	\item Les données utilisées sont souvent elle mêmes des approximations (voir à nouveau la méthode d'Euler)
+	\item Éventuellement, dans le cas d'un calcul sur ordinateur la précision pour chaque variable est finie (la mémoire ne peut stocker de valeurs analogiques)
+\end{enumerate}
+
+En supposant que lors d'un calcul sur ordinateur la précision soit infinie (nous venons de vérifier que ce n'est pas vrai), nous pouvons poser $E_n$ l'erreur d'approximation en chaque point $t_n$ par:
+\begin{equation}
+E_n = \phi(t_n) - u_n
+\end{equation}
+Cette erreur ne repose que sur les deux premiers points de la liste, elle est parfois appellée \emph{erreur globale de troncature}. \\
+\quad En revanche, en relâchant l'hypothèse d'avoir des ordinateurs parfait, nous devons faire face à une erreur supplémentaire,  \emph{l'erreur d'arrondi} qui intervient dès lors que l'on calcule avec une arithmétique à \emph{précision finie}. Cette erreur d'arrondi en un point $t_n$ s'exprime comme
+\begin{equation}
+R_n = y_n - Y_n
+\end{equation}
+avecc $Y_n$ la valeur calculée par la machine en utilisant la méthode numérique. \\
+En ajoutant ces erreurs, nous pouvons constater que l'erreur totale est la somme de la valeur absolue des erreurs d'approximation, et des erreurs d'arrondi.\\
+
+\subsection{Consistance}
+\quad Étant donné ces erreurs, nous pouvons alors évaluer la \emph{consistance} d'un problème: les méthodes génériques pour approcher la solution de \eqref{problemevaleurinitiale} (en considérant $\frac{dy}{dt} = 0$ pour simplifier) sont en général toutes constituées d'une suite de problèmes approchés
+\begin{equation}
+f_n(t_n, y_n) = 0
+\end{equation}
+
+Nous supposerons que le problème est \emph{bien posé} (que sa solution existe, soit unique et dépende continûment des données), sans quoi il devient difficile de montrer sa consistance. Nous verrrons plus tard que les problèmes aux limites considérés sont eux aussi bien posés, cette hypothèse n'est donc pas gênante ici.\\
+\quad Nous verrons que la notion de consistance est 
+
+
 
 
 
@@ -268,7 +350,7 @@ Nous pouvons noter que $A_{df}$ est une M-Matrice, ce qui permet de satisfaire l
 
 Le but est maintenant de réécrire \eqref{diffsFiniesProbleme}. Pour cela, nous pouvons considérer $V_h$ ensemble de fonctions discrètes définies sur les $x_j$ points de la grille. Pour tout $v_h$ dans $V_h$, elle est alors définie en tout point de la grille, et $v_j = v_h(x_j)$.\\ On posera de plus $V_h^0 = \{v_h \in V_h | v_0 = v_n = 0\}$.
 On pourra définir $L_h$ comme
-\begin{equation}
+\begin{equation} \label{notationvj}
 	(L_h v_h)(x_j) = - \frac{v_{j+1} - 2v_j + w_{j-1}}{h^2} \espace \espace v_h \in V_h \espace j \in [[1, n-1]]
 \end{equation}
 On peut alors encore réécrire le problème \eqref{diffsFiniesProbleme} comme:
@@ -298,7 +380,7 @@ On définit la norme $|||.|||_h$ sur $V_h^0$ par:
 	|||v_h||| = \left\{ h \sum_{j = 0}^{n-1} ( \frac{v_{j+1} - v_j}{h})^2 \right\} ^{1/2}
  \end{equation}
 On peut alors constater que
-\begin{equation}
+\begin{equation} \label{normecarrée}
 	(L_h v_h)_h = |||v_h|||^2_h \espace \forall v_h \in V^0_h
 \end{equation}
 
@@ -318,12 +400,20 @@ On peut alors écrire l'inégalité comme
 	(L_h u_h , u_h )_h = (f, u_h)_h
 \end{equation}
 
-On en est ici à la page 427 de quarteroni
+En reprenant la notation introduite dans \eqref{notationvj}, on peut définir $f_d$ fonction discrète égale à $f$ en chaque poitnde la grille. On a alors $f_d(x_i) = f(x_i)$.  À partir de \eqref{normecarrée}, on peut trouver
+\begin{equation}
+|||u_h|||_h^2 \le ||f_d||_h ||u_h||_h
+\end{equation}
+à partir de l'inégalité de Schwarz.
+Alors,  on a 
+\begin{equation} \label{preuveStabilité}
+||u_h||_h \le \frac{1}{2}||f_d||_h
+\end{equation}
+Regarder d'où sortent les uh qui trainent par ici!!!!!!!!!!!!!!!!!!!!!!!!! \\
+ce qui conclut que la seule solution correspondant à $f_d = 0$ est $u_h = 0$, donc le problème aux différences finies ne possède qu'une seule solution. La stabilité, titre de cette section, est quant à elle donnée par la majoration (ou \emph{borne}, comme on est sur une norme) de la solution par $f_d$ qui est une des données du problème.
 
-
-
-
-Continuer avec l'analyse de la convergence des solutions : regarder dans un autre bouquin pour changer?
+\subsection{convergence}
+Nous devons maintenant prouver la convergence du problème aux limites. Nous devrons introduire ici la notion de \emph{consistance} : on est page 427 et on fait un point sur les méthodes numériques, page 37
 
 Si place, regarder les différences finies pour la résolution de problèmes à coefs variables; sinon, on s'en tape.
 
