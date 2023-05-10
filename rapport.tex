@@ -209,9 +209,19 @@ f_n(t_n, y_n) = 0
 \end{equation}
 
 Nous supposerons que le problème est \emph{bien posé} (que sa solution existe, soit unique et dépende continûment des données), sans quoi il devient difficile de montrer sa consistance. Nous verrrons plus tard que les problèmes aux limites considérés sont eux aussi bien posés, cette hypothèse n'est donc pas gênante ici.\\
-\quad Nous verrons que la notion de consistance est 
+\quad Nous pouvons alors définir la notion de consistance d'une méthode numérique donnée comme:
+\begin{equation} \label{defConsistance}
+n \rightarrow \infty \espace \Rightarrow \espace f_n(t, y) - f(t,y) \rightarrow 0
+\end{equation}
+Si cette relation est vraie, la méthode numérique est dite consistante. Sinon, elle ne l'est pas. De plus, une méthode numérique est \emph{fortement consistante} si
+\begin{equation}
+\forall n \in \N \espace  f_n(t, y) - f(t,y) = 0
+\end{equation}
+\\
+\quad Nous retrouvons alors la notion de stabilité: une méthode numérique sera considérée \emph{bien posée} ou \emph {stable} si pour tout $n$ il existe une solution $t_n$ \emph{unique} correspondant à la donnée $y_n$, et que $t_n$ dépend des $y_n$ continûment.
 
 
+(ici arretés page 38 de quarteroni)
 
 
 
