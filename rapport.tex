@@ -211,8 +211,9 @@ f_n(t_n, y_n) = 0
 Nous supposerons que le problème est \emph{bien posé} (que sa solution existe, soit unique et dépende continûment des données), sans quoi il devient difficile de montrer sa consistance. Nous verrrons plus tard que les problèmes aux limites considérés sont eux aussi bien posés, cette hypothèse n'est donc pas gênante ici.\\
 \quad Nous pouvons alors définir la notion de consistance d'une méthode numérique donnée comme:
 \begin{equation} \label{defConsistance}
-n \rightarrow \infty \espace \Rightarrow \espace f_n(t, y) - f(t,y) \rightarrow 0
+n \rightarrow \infty \espace \Rightarrow \espace f_n(t_n, y) - f(t,y) \rightarrow 0
 \end{equation}
+Intuitivement, elle correspond à la quantité d'erreur commise par le schéma numérique, au temps $t_n$ et doit tendre vers une valeur infiniment petite.
 Si cette relation est vraie, la méthode numérique est dite consistante. Sinon, elle ne l'est pas. De plus, une méthode numérique est \emph{fortement consistante} si
 \begin{equation}
 \forall n \in \N \espace  f_n(t, y) - f(t,y) = 0
@@ -422,10 +423,61 @@ Alors,  on a
 Regarder d'où sortent les uh qui trainent par ici!!!!!!!!!!!!!!!!!!!!!!!!! \\
 ce qui conclut que la seule solution correspondant à $f_d = 0$ est $u_h = 0$, donc le problème aux différences finies ne possède qu'une seule solution. La stabilité, titre de cette section, est quant à elle donnée par la majoration (ou \emph{borne}, comme on est sur une norme) de la solution par $f_d$ qui est une des données du problème.
 
-\subsection{convergence}
-Nous devons maintenant prouver la convergence du problème aux limites. Nous devrons introduire ici la notion de \emph{consistance} : on est page 427 et on fait un point sur les méthodes numériques, page 37
+\subsection{Consistance}
+Nous devons maintenant prouver la convergence du problème aux limites. Nous devrons introduire ici la notion de \emph{consistance} : elle a été définie dans le cadre général par \eqref{defConsistance}. Dans notre cas, si $f \in C^0([0,1])$ et la solution de \eqref{probleme} $u$ est de classe $C^2$ sur ce même segment (dont les bornes correspondent aux cas limites) alors nous pouvons considérer \emph{l'erreur de troncature locale} $\tau_h$ définie par
+\begin{equation}\label{erreurTroncatureLocale}
+\tau_h(x_j) = (L_h u)(x_j) - f(x_j) \espace j \in [[1,n-1]]
+\end{equation}
+En développant par Taylor, on a:
+\begin{equation}
+\tau_h(x_j) = (L_h u)(x_j)  + u''(x) = -\frac{h^2}{24}(u^{(iv))} (\chi_j) + u^{(iv))} (\nu_j))
+\end{equation} \label{devTaylorTroncLoc}
+avec $\nu_j \in ]x_j, x_{j+1}[ \wedge \chi_j \in ]x_{j-1}, x_j[$.
+\\ On peut définir la \emph{norme discrète du maximum} par
+\begin{equation} \label{defNormeDiscreteDuMaximum}
+|| v_h ||_{h, \infty}  = \max_{0 \le j \le n} |v_h(x_j)|
+\end{equation}
+ce qui nous permet de déduire de  \eqref{devTaylorTroncLoc} que
+\begin{equation}
+|| \tau_h ||_{h, \infty} \le \frac{||f''||_\infty}{12} * h^2
+\end{equation}
+à partir du moment où on a $f \in C^2([0,1])$ dans \eqref{probleme}. De plus, dans notre cas avec les conditions \eqref{limites} nous avons $\lim_{h \rightarrow 0} \tau_{h, \infty} = 0$ : la méthode des différences finies est donc consistante avec notre problème.
 
-Si place, regarder les différences finies pour la résolution de problèmes à coefs variables; sinon, on s'en tape.
+\subsection{Convergence}
+ Voir si on met la convergence là dedans (si il reste de la place) : grosso modo page 428 de Quarteroni
+
+
+\subsection{Introduction à la formulation intégrale}
+
+Nous utiliseraons dans cette partie les notations d'alfio Quarteroni. Le problème aux limites \eqref{probleme} peut être généralisé comme
+\begin{equation} \label{generalisation}
+-(\alpha u')'(x) + (\beta u')(x) + (\gamma u)(x) = f(x) \espace \forall u \in ]0,1[
+\end{equation}
+en vérifiant les conditions limites \eqref{limites} en posant $u(0) = u(1) = 0$, avec $\alpha$, $\beta$, $\gamma$ des fonctions continues sur $]0,1[$, et en supposant l'existence d'une constante $\alpha_0$ telle que $\alpha(x) \ge \alpha_0 > 0 \espace \forall x \in [0,1]$. \\
+\quad Nous pouvons alors utiliser une méthode dérivée de la fonction test : posons une fonction $v$ de classe $C^1$ sur $[0,1]$ que l'on choisira en tant que fonction test. Nous pouvons alors multiplier \eqref{generalisation} par $v$ et l'intégrer sur l'intervalle $[0,1]$:
+\begin{equation} \label{patéIntegrale}
+\int_0^1 \alpha u' v' dx + \int_0^1 \beta u' v dx + \int_0^1 \gamma u v dx = \int_0^1 fv dx + [\alpha u' v]_0^1
+\end{equation}
+après une intégration par parties sur le premier terme. En appliquant les conditions limites sur $v$ (on oblige $v$ à être nulle en 0 et en 1), on a alors $[\alpha u' v]_0^1 = 0$ ce qui nous donne
+\begin{equation}
+\int_0^1 \alpha u' v' dx + \int_0^1 \beta u' v dx + \int_0^1 \gamma u v dx = \int_0^1 fv dx 
+\end{equation}
+Voir si on garde le truc avant, ca sert peu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+On posera $V$ l'espace des fonctions test telles $v$, en prenant compte les conditions limites : cet espace contient des fonctions continues, s'annulant en 0 et en 1, et de dérivée continue par morceaux. C'est alors un espace vectoriel, que l'on peut aussi noter 
+\begin{equation}
+H_0^1(]0,1[) = \{v \in L^2(]0,1[) \espace | \espace v' \in L^2(]0,1[) \wedge v(0) = v(1) = 0\}
+\end{equation}
+en notant $v'$ la \emph{dérivée au sens des distributions}, dont la définition sera donnée dans la section suivante (bases des distributions).
+
+Nous venons de montrer que si une fonction $u$ de $C^2([0,1])$ satisfait la généralisation \eqref{generalisation} du problème, alors $u$ est aussi la solution du problème
+\begin{equation} \label{problemeSecondaire}
+a(u,v) = (f,v) \espace u \in V \espace \forall v \in V
+\end{equation}
+où on définit $(f,v) = \int_0^1 fv dx$ comme le produit scalaire de $L^2(]0,1[)$, avec de plus
+\begin{equation}
+a(u,v) = \int_0^1 \alpha u' v' dx + \int_0^1 \beta u' v dx + \int_0^1 \gamma u v dx
+\end{equation}
 
 
 
