@@ -446,6 +446,11 @@ ce qui nous permet de déduire de  \eqref{devTaylorTroncLoc} que
 \subsection{Convergence}
  Voir si on met la convergence là dedans (si il reste de la place) : grosso modo page 428 de Quarteroni
 
+\subsection{différences finies pour les problèmes en dimension 1}
+
+Médidon Jamy, il nous manque une partie!
+Quarteroni page 430, à priori 2 pages mais en lien avec le pdf sur les méthodes num...
+
 
 \subsection{Introduction à la formulation intégrale}
 
@@ -478,7 +483,18 @@ où on définit $(f,v) = \int_0^1 fv dx$ comme le produit scalaire de $L^2(]0,1[
 \begin{equation}
 a(u,v) = \int_0^1 \alpha u' v' dx + \int_0^1 \beta u' v dx + \int_0^1 \gamma u v dx
 \end{equation}
+forme bilinéaire par rapport à $(u,v)$.
 
+On appellera \emph{formulation faible} le problème \eqref{problemeSecondaire} : cette formulation est plus généaliste, car ellle permet d'étudier des cas où $u$ n'est pas de classe $C^2$, car les dérivées sont toutes simples. Cette formulation permet de décrire par exemple le problème de la déformation d'une corde élastique, qui sera étudié par la suite.
+
+En cas de non homogénité des conditions limites dans \eqref{généralisation} (ce qui arrive dans le cas général), il est toujours possible de se ramener à la forme \eqref{problemeSecondaire} en utlisant des \emph{conditions limites de Neumann} et une interpolation des extrémités par une fonction affine (détails dans quarteroni, page 433).
+
+\subsection{Bases des distributions}
+
+Page 434 (ou 438), pas tres long et nécessaire pour le reste.
+
+\subsection{propriétés de la méthode de Galerkin}
+Rigolo, à mettre si on veut résoudre le problème un jour
 
 
 
@@ -496,6 +512,7 @@ a(u,v) = \int_0^1 \alpha u' v' dx + \int_0^1 \beta u' v dx + \int_0^1 \gamma u v
 \subsection{Conduction de la chaleur}
 
 \subsection{Déformation d'une corde élastique}
+Dans le quarteroni page 433
 
 \subsection{Problème stationnaire elliptique}
 
