@@ -447,6 +447,15 @@ ce qui nous permet de déduire de  \eqref{devTaylorTroncLoc} que
  Voir si on met la convergence là dedans (si il reste de la place) : grosso modo page 428 de Quarteroni
 
 \subsection{différences finies pour les problèmes en dimension 1}
+Dans cette partie, on utilisera une généralisation du problème aux limites \eqref{probleme} \eqref{limite} en une dimension:
+\begin{equation}
+Lu(x) = -(J(u)(x))' + \gamma (x) u(x)  = f(x) \espace \forall x \in ]0,1[
+\end{equation}
+avec les conditions limites $d_0$ et $d_1$:
+\begin{equation}
+u(0) = d_0 \espace u(1) = d_1
+\end{equation}
+en posant $J(u)(x) = \alpha(x) u'(x)$ et $\alpha$, $\gamma$, $f$ des fonctions connues et continues sur l'intervalle $[0,1]$. L'hypothèse de continuité est généralement vérifiée dans les applications physiques.
 
 Médidon Jamy, il nous manque une partie!
 Quarteroni page 430, à priori 2 pages mais en lien avec le pdf sur les méthodes num...
@@ -487,7 +496,7 @@ forme bilinéaire par rapport à $(u,v)$.
 
 On appellera \emph{formulation faible} le problème \eqref{problemeSecondaire} : cette formulation est plus généaliste, car ellle permet d'étudier des cas où $u$ n'est pas de classe $C^2$, car les dérivées sont toutes simples. Cette formulation permet de décrire par exemple le problème de la déformation d'une corde élastique, qui sera étudié par la suite.
 
-En cas de non homogénité des conditions limites dans \eqref{généralisation} (ce qui arrive dans le cas général), il est toujours possible de se ramener à la forme \eqref{problemeSecondaire} en utlisant des \emph{conditions limites de Neumann} et une interpolation des extrémités par une fonction affine (détails dans quarteroni, page 433).
+En cas de non homogénité des conditions limites dans \eqref{generalisation} (ce qui arrive dans le cas général), il est toujours possible de se ramener à la forme \eqref{problemeSecondaire} en utlisant des \emph{conditions limites de Neumann} et une interpolation des extrémités par une fonction affine (détails dans quarteroni, page 433).
 
 \subsection{Bases des distributions}
 
