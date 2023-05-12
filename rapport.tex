@@ -448,14 +448,54 @@ ce qui nous permet de déduire de  \eqref{devTaylorTroncLoc} que
 
 \subsection{différences finies pour les problèmes en dimension 1}
 Dans cette partie, on utilisera une généralisation du problème aux limites \eqref{probleme} \eqref{limite} en une dimension:
-\begin{equation}
+\begin{equation} \label{generalisationLu}
 Lu(x) = -(J(u)(x))' + \gamma (x) u(x)  = f(x) \espace \forall x \in ]0,1[
 \end{equation}
 avec les conditions limites $d_0$ et $d_1$:
 \begin{equation}
 u(0) = d_0 \espace u(1) = d_1
 \end{equation}
-en posant $J(u)(x) = \alpha(x) u'(x)$ et $\alpha$, $\gamma$, $f$ des fonctions connues et continues sur l'intervalle $[0,1]$. L'hypothèse de continuité est généralement vérifiée dans les applications physiques.
+en posant $J(u)(x) = \alpha(x) u'(x)$ et $\alpha$, $\gamma \ge 0$, $f$ des fonctions connues et continues sur l'intervalle $[0,1]$. L'hypothèse de continuité est généralement vérifiée dans les applications physiques.  Nous appellerons $J(u)$ le \emph{flux associé à u}, il nous sera utile dans la partie de résolution des applications.
+
+Pour l'application, nous suivrons la méthode décrite dans Alfio Quarteroni : nous reprendrons la grille uniforme précédente des $(x_j)$, et nous créerons une nouvelle grille utilisant les \emph{points milieu} de cette grille: nous définirons les point milieu comme les $x_{j+1/2} = (x_j + x_{j+1}) /2 \espace \forall j \in [[1,n-1]]$. \\
+Alors, nous pouvons introduire un nouveau schéma aux différences finies pour approcher \eqref{generalisationLu}: nous cherchons $u_h \in V_h \espace |$
+\begin{equation} \label{miseEnFormeTemporaire}
+L_h u_h (x_j) = f(x_j) \espace \forall j \in [[1,n-1]]
+\end{equation}
+avec les conditions limites
+\begin{equation}
+u_h(x_0) = d_0 \espace \wedge u_h(x_n) = d–1
+\end{equation}
+en définissant $L_h$ à partir de la fonction $\gamma$ précédente par:  REDÉFINIR LES WH : DANS L'ANALYSE DE LA CONVERGENCE UN PEU PLUS HAUT!!!!!!!!!!!!!!!!!!!!!!
+\begin{equation}
+	L_h w_h (x_j) = - \frac{J_{j + 1/2}(w_h) - J_{j - 1/2}(w_h)}{h} + \gamma_j w_j  \espace \forall j \in [[1,n-1]]
+\end{equation}
+On a repris ici la notation habituelle $\gamma_j = \gamma(x_j)$. Nous pouvons alors poser $\alpha_{j+1/2} = \alpha(x_{j+1/2})$, afin de définir les \emph{flux approchés} $J_i \espace \forall i \in [[1/2,n-1/2]]$:
+\begin{equation}
+J_{j+1/2} (w_h) = \alpha_{j+1/2} * \frac{w_{j+1} - w_j}{h}
+\end{equation}
+
+À partir de cette formulation avec des flux approchés, nous pouvons alors remettre en forme le problème \eqref{miseEnFormeTemporaire} ainsi que ses conditions limites avec les flux approchés $J_i$. Pour cela, nous aurons besoin de définir la matrice de différences finies $A_{df}$ comme:
+\begin{equation} \label{definitionADF}
+A_{fd} = h^{-2} tridiag_{n-1} (a,d,a) + diag_{n-1}(c)
+\end{equation}
+avec:
+\begin{itemize}
+  \item $a = -[\alpha_{3/2}, ..., \alpha_{n-3/2}]^T$ (indices de pas 1)
+  \item $d = [\alpha_{1/2}+\alpha_{3/2}, ..., \alpha_{n-3/2} +\alpha_{n-1/2}]^T$
+  \item $c = [\gamma_1, ..., \gamma_{n-1}]^T$
+\end{itemize}
+Avec les facteurs de $a$, $d$, $c$ dans $\R$. La démonstration est assez longue et calculatoire, et globalement peu intéressante ici, nous renvoyons à Alfio Quarteroni?.
+
+Nous pouvons dès lors remarquer que la matrice $A_{fd}$ de \eqref{definitionADF} est définie positive, symétrique, et à diagonale strictement dominante (la valeur avsolue de chaque terme sur la diagonale est supérieur non strictement à la somme des valeurs absolues des autres termes de sa ligne) pourvu que $\gamma > 0$.\\
+\quad On peut analyser la convergence de ce schéma aux différences finies en reprenant la technique de la Méthode de l'Energie vue précédemment.
+Il est possible enfin de définir différentes conditions limites, plus générales que celles définies au début de cette section : une pléthore de ces conditions ont vu le jour dans des applications physiques, nous nous focaliserons principalement sur les conditions dites de \emph{Neumann} et de \emph{Dirichlet}. Ces conditions s'expriment respectivement comme
+\begin{equation}
+J(u)(1) = g_1 \espace ; \espace u(0) = d_0
+\end{equation}
+
+Nous allons discrétiser la condition de Neumann, en utilisant la \emph{technique du miroir}, qui consiste à ne garder qu'une partie simple d'une fonction $\phi$ et à la développant linéairement:
+
 
 Médidon Jamy, il nous manque une partie!
 Quarteroni page 430, à priori 2 pages mais en lien avec le pdf sur les méthodes num...
