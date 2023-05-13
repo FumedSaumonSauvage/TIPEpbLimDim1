@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.23)  13 MAY 2023 03:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.23)  13 MAY 2023 16:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -365,63 +365,63 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (11.8718pt too wide) in paragraph at lines 135--136
+Overfull \hbox (11.8718pt too wide) in paragraph at lines 138--139
  \OT1/cmr/m/n/12 Nous nous fo-calis-erons main-tenant sur un ex-em-ple pour d^^
 Sefinir la sta-bilit^^Se des m^^Sethodes num^^Seriques
  []
 
-[2]
+[2] [3]
 
-LaTeX Warning: Command \textendash invalid in math mode on input line 179.
+LaTeX Warning: Command \textendash invalid in math mode on input line 182.
 
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 201--204
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 204--207
 
  []
 
-[4] [5]
-Overfull \hbox (9.36072pt too wide) in paragraph at lines 252--256
+[5]
+Overfull \hbox (9.36072pt too wide) in paragraph at lines 255--259
 \OT1/cmr/m/n/12 De plus, la forme int^^Segrale [] est bien plus prop-ice ^^Ra l
 'analyse num^^Serique que l'^^Sequation diff^^Serentielle
  []
 
 [6] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 322--322
+Underfull \hbox (badness 10000) in paragraph at lines 325--325
 \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT
 1/cmr/m/n/12 )\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; s\OT1/cmr/
 m/n/12 )\OML/cmm/m/it/12 ds|$ 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 322
+Underfull \hbox (badness 10000) detected at line 325
 \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT
 1/cmr/m/n/12 )\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; s\OT1/cmr/
 m/n/12 )\OML/cmm/m/it/12 ds|$ 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 322
+Underfull \hbox (badness 10000) detected at line 325
 \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT
 1/cmr/m/n/12 )\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; s\OT1/cmr/
 m/n/12 )\OML/cmm/m/it/12 ds|$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--322
+Underfull \hbox (badness 10000) in paragraph at lines 325--325
 \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT
 1/cmr/m/n/12 )\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; s\OT1/cmr/
 m/n/12 )\OML/cmm/m/it/12 ds|$ 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 322
+Underfull \hbox (badness 10000) detected at line 325
 \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT
 1/cmr/m/n/12 )\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; s\OT1/cmr/
 m/n/12 )\OML/cmm/m/it/12 ds|$ 
  []
 
 
-Underfull \hbox (badness 10000) detected at line 322
+Underfull \hbox (badness 10000) detected at line 325
 \OT1/cmr/m/n/12 = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 s\OT
 1/cmr/m/n/12 )\OML/cmm/m/it/12 G\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x; s\OT1/cmr/
 m/n/12 )\OML/cmm/m/it/12 ds|$ 
@@ -429,21 +429,29 @@ m/n/12 )\OML/cmm/m/it/12 ds|$
 
 [8] [9] [10] [11]
 
-LaTeX Warning: Reference `limite' on page 12 undefined on input line 457.
+LaTeX Warning: Reference `limite' on page 12 undefined on input line 460.
 
 
-LaTeX Warning: Command \textendash invalid in math mode on input line 474.
+LaTeX Warning: Command \textendash invalid in math mode on input line 477.
 
-[12] [13] [14] [15] [16] (./rapport.aux)
+[12] [13] [14] [15]
+
+LaTeX Warning: Reference `problemeApproximé' on page 16 undefined on input lin
+e 598.
+
+[16] [17] (./rapport.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3740 strings out of 478268
- 57099 string characters out of 5846347
+ 3741 strings out of 478268
+ 57119 string characters out of 5846347
  365649 words of memory out of 5000000
- 21917 multiletter control sequences out of 15000+600000
+ 21918 multiletter control sequences out of 15000+600000
  478706 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  70i,7n,85p,754b,215s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -463,10 +471,10 @@ ve/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/20
 22/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texliv
 e/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on rapport.pdf (16 pages, 224647 bytes).
+Output written on rapport.pdf (17 pages, 227845 bytes).
 PDF statistics:
- 132 PDF objects out of 1000 (max. 8388607)
- 83 compressed objects within 1 object stream
+ 135 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

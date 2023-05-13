@@ -102,6 +102,9 @@ ce qui nous permettra d'introduire avec $G$ le concept de \emph{Fonction de Gree
 
 Les applications du problème aux limites en dimension 1 sont multiples, et relativement nombreuses dans la physique où sa résolution permet la simulation de plusieurs phénomènes tels que la conduction de la chaleur, et les défomrations élastiques.
 
+Historiquement parlant, les problèmes aux limites sont apparus avec le développement de la physique: plusieurs mathématiciens tels que Jean Baptiste Fourier et Carl Gauss ont largement participé au développement de cette classe de problèmes au 19e siècle, dans le cadre de résolution de problèmes pour la physique.
+Les problèmes aux limites sont encore actuellement largement utililisés en recherche, notamment en physique où la réslution d'équations différentielles est courante.
+
 
 
 \section{Méthode des différences finies}
@@ -604,13 +607,8 @@ A_G u = f_G
 La précision de $u_h$ dépend de la forme des fonctions de la base $\phi$, qui est elle même déterminée par $V_h$.
 
 Nous pourrions démontrer par la suite que la méthode de Galerkin est bornée par rapport à la dimension de $V_h$,  ce qui montre sa stabilité.
-
-\subsection{Méthode des éléments finis}
-Mettre les élts finis pour la résolution de Galerkin? ou osef?
-
-
-
-
+La méthode de Galerkin permet alors de trouver des solutions au problème aux différences finies, pour peu que l'on connaisse $V_h$. Une méthode possible pour trouver $V_h$ est la méthode des \emph{éléments finis}: en résumé, elle consiste ici à discrétiser l'espace de recherche, puis d'approximer la solution de l'équation différentielle interpolant la solution en chaque point discrétisé de manière à avoir un résultat satisfaisant (continu notamment).\\
+Nous ne traiterons pas cette méthode ici par manque de temps.
 
 
 
