@@ -6,6 +6,8 @@
 \usepackage[utf8]{inputenc} 
 %\usepackage[francais]{babel}
 
+\usepackage{tikz}
+
 \usepackage{breqn}
 %Dimensions
 \usepackage{geometry }
@@ -620,13 +622,112 @@ Nous ne traiterons pas cette méthode ici par manque de temps.
 
 \subsection{Conduction de la chaleur}
 
+Nous étudierons ici la conduction de la chaleur dans une barre en métal, un problème de physique extrêmement classique:\\
+Soit une barre de conductivité calorifique $K$, avec un bout en $x = 0$ et un autre en $x = L$. Nous supposons une isolation parfaite de tous les côtés, pour ne pas avoir de perte de chaleur.
+
+\begin{center}
+\begin{tikzpicture}
+\draw (0,0) rectangle (8,1);
+\draw[dashed] (0,-0.1) -- (0,1.1);
+\draw[dashed] (8,-0.1) -- (8,1.1);
+\node[below] at (0,-0.1) {$x=0$};
+\node[below] at (8,-0.1) {$x=L$}; 
+\end{tikzpicture}
+\end{center}
+
+Ce problème est à une dimension, car la chaleur en un point $x$ n'est dépendante que du temps, nous pouvons alors poser la fonction de chaleur comme $u(x,t)$ pour être cohérent avec la définition du problème aux limites \eqref{probleme}.
+L'équation de la chaleur est donnée par:
+\begin{equation} \label{equationChaleur}
+\frac{\partial u}{\partial t} = K \frac{\partial^2 u}{\partial^2 x} \espace x \in]0,L[ \espace t>0
+\end{equation}
+
+Supposons que la température initiale soit $f(x)$, et que la température en chaque bout soit 0. Nous avons alors
+\begin{equation} \label{temperaturesBouts}
+u(0,t) = 0\espace u(L,t) = 0
+\end{equation}
+ce qui décrit l'hypothèse de température nulle en $x=0$ et $x=L$.  À partir de l'hypothèse de température $f(x)$, nous pouvons écrire
+\begin{equation}
+u(x,0) = f(x) \espace \forall x \in ]0,L[
+\end{equation}
+Nous pouvons ajouter une hypothèse de limite de la température car le problème est physique. En choisissant $M < \infty$, nous avons alors de plus:
+\begin{equation}
+|u(x,t)| < M \espace \forall x \in ]0,L[
+\end{equation}
+En considérant ces 3 propositions, nous avons alors bien un problème aux limites en dimension 1., qui est de plus équivalent à la conduction de la chaleur dans une plaque infinie délimitée par les plans $x=0$ et $x=L$ et où la température initiale serait f(x).
+
+Nous pouvons ajouter des hypothèses supplémentaires pur faire évoluer le problème : 
+en partant du principe que le bout $x=L$ de la barre est isolée parfaitement au lieu d'être à température 0, nous devons trouver un remplacement de l'hypothèse \eqref{temperaturesBouts}. Pour cela, nous considérons que si le bout est isolé, alors le flux en cet endroit est nul:
+\begin{equation}
+-K \frac{\partial u}{\partial x} |_{x=L} = 0
+\end{equation}
+ce que nous pouvons réécrire
+\begin{equation}
+u_x(L,t) = 0
+\end{equation}
+en notant $u_x$ la fonction $t \rightarrow u(L,t)$ : nous avons alors une nouvelle condition limite.
+
+Une autre variante consiste à utiliser le flux calorifique \emph{radiant},  d'un objet à un autre afin d'en déduire une nouvelle condition limite qui permettra de trouver la \emph{loi du refroidissement de Newton}.
+
 \subsection{Déformation d'une corde élastique}
-Dans le quarteroni page 433
+Dans la vibration d'une corde élastique, nous considérons une corde de longueur L se déformant exclusivement grâce à son élasticité : les deux extrémités sont attachées et nous faisons vibrer la corde tendue,comme par exemple dans le cas d'un violoncelle.\\ 
+Nous noterons $y(x,t)$ le décalace par rapport à la corde tendue du point $x$ à l'instant $t$. Nous avons alors 
+\begin{equation} \label{eqVibration}
+\frac{\partial^2 y}{\partial t^2} = a^2 \frac{\partial^2 y}{\partial x^2}
+\end{equation}
+où $a^2 = \frac{\tau}{\mu}$ avec $\tau$ constante de tension dans la corde, et $\mu$ la constante de masse par unité de longueur de la corde.
+Nous pouvons dorénavant noter que la vibration, qui est ici sur une seule dimension, peut être généralisée en deux dimensions (par exemple pour la membrane d'un tambour) en une formule très similaire.
 
-\subsection{Problème stationnaire elliptique}
+L'équation de la vibration de la corde élastique est bien un problème aux limites : nous pouvons poser les limites
+\begin{equation}
+y(0,t) = 0 \espace y(L,t) = 0 \espace \forall t \ge 0
+\end{equation}
+comme les points 0 et L sont des points d'attache de la corde, aucun mouvement n'est possible. En supposant que la corde ne soit  initialement pas tendue, nous pouvons ajouter une contrainte de forme au temps $t=0$
+\begin{equation}
+y(x,0) = f(x) \espace \forall x \in [0,L]
+\end{equation}
+ainsi qu'une fonction $g$ de vitesse initiale de chaque point $x$:
+\begin{equation}
+y_t(x,0) = g(x) \espace \forall x \in [0,L]
+\end{equation}
+en reprenant les notations de l'exemple sur la conduction de la chaleur.
 
-\subsection{Problème hyperbolique}
 
 
+
+\subsection{Equations hyperboliques et elliptiques}
+Greens functions \& bvp page 465
+
+Les problèmes elliptiques et hyperboliques se rapportent à des équations différentielles du second ordre. N'ayant pas de méthode de résolution des problèmes aux limites en dimension 2 ici, nous nous contenterons de décrire ces problèmes.\\
+Considérons l'équation du second ordre à deux variables suivante à deux variables $x$ et $y$:
+\begin{equation}
+a(x,y) \frac{\partial^2 u}{\partial x^2} + 2b(x,y) \frac{\partial^2 u}{\partial x \partial y} + c(x,y) \frac{\partial^2 u}{\partial y^2} + F(x,y,u,  \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}) = 0
+\end{equation}
+Cette équation ne sera linéaire que si:
+\begin{equation}
+F(x,y,u,  \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}) = d\frac{\partial u}{\partial x} + e\frac{\partial u}{\partial y} + fu + g
+\end{equation}
+avec $d$, $e$, $f$, $g$ fonctions linéaires continues de de $x$ et $y$ individuellement.  Nous supposons que $u$ et ses dérivées partielles selon $x$ et $y$ sont connues sur $\Gamma$, courbe du plan formé par $x$ et $y$.\\
+Il nous faut maintenant trouver des limites, pour avoir un problème aux limites en dimension 2.
+
+Posons $p = (x, y)$ et $q = (x+dx, y+dy)$ deux points adjacents de $\Gamma$. Les 3 dérivées secondes de $u$ devront vérifier alors les 3 relations suivantes au voisinage de P d'après la définition de la dérivée partielle:
+\begin{equation}
+\frac{\partial u}{\partial x}(q) - \frac{\partial u}{\partial x}(p) = dx\frac{\partial^2 u}{\partial x^2}(p) + dy \frac{\partial^2 u}{\partial x \partial y}(p)
+\end{equation}
+\begin{equation}
+\frac{\partial u}{\partial y}(q) - \frac{\partial u}{\partial y}(p) = dx\frac{\partial^2 u}{\partial x \partial y}(p) + dy \frac{\partial^2 u}{\partial y^2}(p)
+\end{equation}
+\begin{equation}
+-F_p = a(p)\frac{\partial^2 u}{\partial x^2}(p) + 2b(p) \frac{\partial^2 u}{\partial x \partial y}(p) + c\frac{\partial^2 u}{\partial y^2}(p)
+\end{equation}
+avec $-F_p = -F(p, u(p), \frac{\partial u}{\partial x}(p), \frac{\partial u}{\partial y}(p))$.
+
+En transformant ces équations en un système, nous pouvons alors vérifier que $\Gamma$ sera caractéristique au point $p = (x,y)$ si et seulement si $p$ satisfait
+\begin{equation}\label{trucASatisfaire}
+\frac{\partial y}{\partial x} = \frac{b +- \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+\begin{itemize}
+\item Si $b^2 - 4ac <0$,  l'équation est dite \emph{elliptique} au point $p$,  et aucune courbe $\Gamma$ ne peut satisfaire \eqref{trucASatisfaire}: elle est similaire à l'équation de Laplace.
+\item Si $b^2 - 4ac >0$, il y a deux directions caractéristiques en $p$ et l'équation est dite \emph{hyperbolique} en $p$.  L'équation de la défomation d'un plan élastique (une corde élastique en 2 dimensions) vue précédemment est elle aussi hyperbolique.
+\end{itemize}
 
 \end{document}
