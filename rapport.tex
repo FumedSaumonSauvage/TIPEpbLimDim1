@@ -444,7 +444,14 @@ ce qui nous permet de déduire de  \eqref{devTaylorTroncLoc} que
 à partir du moment où on a $f \in C^2([0,1])$ dans \eqref{probleme}. De plus, dans notre cas avec les conditions \eqref{limites} nous avons $\lim_{h \rightarrow 0} \tau_{h, \infty} = 0$ : la méthode des différences finies est donc consistante avec notre problème.
 
 \subsection{Convergence}
- Voir si on met la convergence là dedans (si il reste de la place) : grosso modo page 428 de Quarteroni
+Cette partie sera laissée de côté dans cette analyse, car elle est relativement complexe et ne présente pas de réel intérêt : le résultat de la convergence reprend les arguments de stabilité et de consistance, et montre que l'erreur de discrétisation est comparable à l'erreur de stabilité.\\
+Nous définirons en revanche les fonctions $w_h$ pour toute fonction discrète $g \in V_0^h$, qui nous seront utiles par la suite dans la résolution du problème en une dimension:
+\begin{equation} \label{defWK}
+w_h = \sum_{k=1}^{n-1} g(x_k) G^k
+\end{equation}
+où nous posons G fonction de Greene.
+
+Nous laisons le soin au lecteur de voir p 428 d'alfio quarteroni.
 
 \subsection{différences finies pour les problèmes en dimension 1}
 Dans cette partie, on utilisera une généralisation du problème aux limites \eqref{probleme} \eqref{limite} en une dimension:
@@ -466,8 +473,8 @@ avec les conditions limites
 \begin{equation}
 u_h(x_0) = d_0 \espace \wedge u_h(x_n) = d–1
 \end{equation}
-en définissant $L_h$ à partir de la fonction $\gamma$ précédente par:  REDÉFINIR LES WH : DANS L'ANALYSE DE LA CONVERGENCE UN PEU PLUS HAUT!!!!!!!!!!!!!!!!!!!!!!
-\begin{equation}
+en définissant $L_h$ à partir de la fonction $\gamma$ précédente et des $w_k$ de \eqref{defWK} par:
+\begin{equation} \label{katto}
 	L_h w_h (x_j) = - \frac{J_{j + 1/2}(w_h) - J_{j - 1/2}(w_h)}{h} + \gamma_j w_j  \espace \forall j \in [[1,n-1]]
 \end{equation}
 On a repris ici la notation habituelle $\gamma_j = \gamma(x_j)$. Nous pouvons alors poser $\alpha_{j+1/2} = \alpha(x_{j+1/2})$, afin de définir les \emph{flux approchés} $J_i \espace \forall i \in [[1/2,n-1/2]]$:
@@ -490,15 +497,29 @@ Avec les facteurs de $a$, $d$, $c$ dans $\R$. La démonstration est assez longue
 Nous pouvons dès lors remarquer que la matrice $A_{fd}$ de \eqref{definitionADF} est définie positive, symétrique, et à diagonale strictement dominante (la valeur avsolue de chaque terme sur la diagonale est supérieur non strictement à la somme des valeurs absolues des autres termes de sa ligne) pourvu que $\gamma > 0$.\\
 \quad On peut analyser la convergence de ce schéma aux différences finies en reprenant la technique de la Méthode de l'Energie vue précédemment.
 Il est possible enfin de définir différentes conditions limites, plus générales que celles définies au début de cette section : une pléthore de ces conditions ont vu le jour dans des applications physiques, nous nous focaliserons principalement sur les conditions dites de \emph{Neumann} et de \emph{Dirichlet}. Ces conditions s'expriment respectivement comme
-\begin{equation}
+\begin{equation} \label{limitesNeumannDirichlet}
 J(u)(1) = g_1 \espace ; \espace u(0) = d_0
 \end{equation}
 
-Nous allons discrétiser la condition de Neumann, en utilisant la \emph{technique du miroir}, qui consiste à ne garder qu'une partie simple d'une fonction $\phi$ et à la développant linéairement:
+Nous allons discrétiser la condition de Neumann, en utilisant la \emph{technique du miroir}, qui consiste à ne garder qu'une partie simple d'une fonction $\psi$ et à la développant linéairement:
+\\Posons $\psi$ fonction régulière, nous pouvons la développer en sérien de Taylor en $x_n$ comme 
+\begin{equation}
+\psi_n = \frac{\psi_{n-1/2} + \psi_{n+1/2}}{2} - \frac{h^2}{16}(\psi '' (\eta_n) + \psi '' \zeta_n))
+\end{equation}
+en choisissant $\eta_n$ dans $[x_{n-1/2}, x_n[$ et $\zeta_n$ dans $]x_n, x_{n+1/2}].$ On peut alors utiliser la condition limite \eqref{limitesNeumannDirichlet},
+\begin{equation} \label{pointFantome}
+\psi = J(u) \espace \Rightarrow \espace J_{n+1/2}(u_h) = 2g_1 - J_{n-1/2}(u_h)
+\end{equation}
+Le point $x_{n+1/2} = x_n + h/2$ n'existe pas comme il sort de la grille (on suppose le pas uniforme, et différent de 0) : il est appellé \emph{point fantôme} dans Alfio Quarteroni.  Nous obtenons le flux approché correspondant par prolongation linéaire des deux flux précédents $J_{n-1/2}$ et $J_n$. En $x_n$, l'équation \eqref{katto} se reformule
+\begin{equation}
+\frac{J_{n-1/2}(u_h) - J_{n+1/2}(u_h)}{h} + \gamma_n u_n = f_n
+\end{equation}
+Nous pouvons alors reprendre le point fantôme vu dans \eqref{pointFantome} pour que $J_{n+1/2}$ existe (ou pas, finalement...), et on obtient une approximation à l'ordre 2 en développant l'équation précédente:
+\begin{equation}
+- \alpha_{n-1/2} \frac{u_{n-1}}{h^2} + (\frac{\alpha_{n-1/2}}{h^2} + \frac{\gamma_n}{2} ) u_n = \frac{g_1}{h} + \frac{f_n}{2}
+\end{equation}
 
-
-Médidon Jamy, il nous manque une partie!
-Quarteroni page 430, à priori 2 pages mais en lien avec le pdf sur les méthodes num...
+À partir de cette formule, nous pouvons alors modifier simplement les coefficients de la matrice de \eqref{turboCompact}, ce qui termine l'utilisation des différences finies pour la résolution du problème en dimension 1.
 
 
 \subsection{Introduction à la formulation intégrale}
@@ -540,11 +561,52 @@ En cas de non homogénité des conditions limites dans \eqref{generalisation} (c
 
 \subsection{Bases des distributions}
 
-Page 434 (ou 438), pas tres long et nécessaire pour le reste.
+Cette section est dédiée à la présentation des bases de la théorie des distributions, qui nous sera utile ors de l'étude des propriétés de la méthode de Galerkin. En résumé, la théorie des distributions est un outil servant à généraliser la notion de dérivée d'une fonction, afin de pouvoir résoudre certaines équations différentielles (par exemple, un problème aux limites en dimension 1). Les distributions utilisent une méthode différente pour évaluer une fonction : au lieu d'évaluer la fonction en un point, on évalue la fonction sur un voisinage du point tout en effectuant une moyenne (posiblement pondérée) sur ces points afin de réduire le poids des discontinuité dans le résultat.
 
-\subsection{propriétés de la méthode de Galerkin}
-Rigolo, à mettre si on veut résoudre le problème un jour
+Supposons $X$ un espace vectoriel normé complet (c'est à dire un \emph{espace de Banach}). Définissons une \emph{forme} $T: X \rightarrow \R$ continue linéaire sur $X$. Nous utiliserons la notation de \emph{dualité}, utilisée dans la théorie des distributions:
+\begin{equation}
+\langle T, x\rangle = T(x)
+\end{equation}
 
+Nous pouvons également définir la notation de l'espace des fonctions indéfiniment dérivables de support compact sur $[a,b]$ : $C_0^\infty (]a,b[)$. Nous considérons que tous les compacts seront dans $]0,1[$ à des fins pratiques, comme cet intervalle correspond aux limites de notre problème.\\
+Nous pouvons maintenant introduire la notion d' \emph{espace dual} : c'est l'espace défini par les formes linéaires $C_0^\infty (]0,1[)$, que l'on notera $D'(]0,1[)$. Les éléments le composant sont des \emph{distributions} : toute fonction localement intégrable $f$ est associée à une distribution notée $\phi$ et définie par
+\begin{equation}
+\langle f, \phi \rangle = \int_0^1 f \phi
+\end{equation}
+Nous avons maintenant les bases pour introduire les \emph{dérivées au sens des distributions} : soit $T \in D'(]0,1[)$. Alors, $\forall k \in \N *$, $T^{(k)}$ est une distribution telle que 
+\begin{equation}
+\langle T^{(k)}, \phi \rangle = (-1)^k \langle T, \phi^{(k)} \rangle \espace \forall \phi \in C_0^\infty(]0,1[)
+\end{equation}
+
+Un court exemple est disponible dans Alfio Quarteroni.
+
+\subsection{Propriétés de la méthode de Galerkin}
+
+La méthode de Galerkin permet la résolution du problème aux limites par une autre approche que les différences finies: on utilise ici la résolution du problème \eqref{problemeSecondaire}, appellée \emph{formulation faible}.\\
+En supposant $V_h$ un sous espace vectoriel de $V$ tel que $dim(V_h) < \infty$, la méthode de Galerkin consiste à approximer le problème \eqref{problemeSecondaire} par:
+\begin{equation} \label{problemeApproximé}
+u_h \in V_h \espace | \espace a(u_h, v_h) = (f(v_h) \espace \forall v_h \in V_h
+\end{equation}
+Qui devient un autre problème lorsqu'on cherche $u_h$.
+Il n'est pas forcément évident que ce problème soit en dimension finie (EXPLIQUER PQ?), nous allons le montrer. Soit $\{\phi_1, ..., \phi_N\}$ base de $V_h$, avec $dim(V_h) = N$. On peut alors dire que 
+\begin{equation}
+u_h(x) = \sum_{j = 1}^{N} u_j \phi_j(x)
+\end{equation}
+Avec $v_h = \phi_i$ dans \eqref{problemeApproximé}, le problème devient la recherche de $N$ réels $\{u_1, ..., u_N\} \espace |$
+\begin{equation}
+\sum_{j=1}^N u_j a(\phi_j, \phi_i) \espace \forall i \in [[1,N]]
+\end{equation}
+On rappellera que $a(.,.)$ est linéaire par rapport à la première place.
+Nous introduirons la matrice $A_G = (a_{ij}) \espace | \espace a_{ij} = a(\phi_j, \phi_i)$, un vecteur colonne inconnu solution de notre ptoblème $u = [u_1, ..., u_N]$ et le \emph{second membre} colonne $f_G = [f_1, ..., f_N] \espace | \espace f_i = (f, \phi_i)$ : nous pouvons alors voir que comme pour \eqref{turboCompact}, nous pouvons compacter l'équation précédente en 
+\begin{equation}
+A_G u = f_G
+\end{equation}
+La précision de $u_h$ dépend de la forme des fonctions de la base $\phi$, qui est elle même déterminée par $V_h$.
+
+Nous pourrions démontrer par la suite que la méthode de Galerkin est bornée par rapport à la dimension de $V_h$,  ce qui montre sa stabilité.
+
+\subsection{Méthode des éléments finis}
+Mettre les élts finis pour la résolution de Galerkin? ou osef?
 
 
 
