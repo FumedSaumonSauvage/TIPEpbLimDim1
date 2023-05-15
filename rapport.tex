@@ -5,6 +5,7 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc} 
 %\usepackage[francais]{babel}
+\usepackage{hyperref}
 
 \usepackage{tikz}
 
@@ -71,6 +72,30 @@
 
 \begin{document}
 	\maketitle
+\begin{center}
+\href{https://github.com/FumedSaumonSauvage/TIPEpbLimDim1}{Source GitHub}
+\end{center}
+
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+
+\section{Bibliographie commentée}
+
+
+\begin{itemize}
+  \item[] \emph{Méthodes Numériques, Alfio Quarteroni, Ricardo Sacco, Fausto Saleri} : c'est l'ouvrage utilisé majoritairement pour la rédaction de ce rapport. Il a été utile pour avoir les bases des problèmes aux limites, ainsi que pour leur résolution numérique comme par exemple pour l'approximation par différences finies. Il est de plus la source de la courte partie concernant le problème en dimension 2, ainsi que pour les distributions et la méthode de Galerkin.
+  \item[] \emph{Green's Function, second edition, G. F. Roach} : cet ouvrage a surtout été utilisé, comme son titre l'indique, pour les fonctions de Green.
+  \item[] \emph{Studies in Advanced Mathematics - Green's functions with applications,  Dean G. Duffy} : utilisé au même titre que le livre précédent pour les fonction de Green, pour la compréhension en première lecture principalement.
+  \item[] \emph{Schaum's Outlines - Fourier Analysis, Murray Spiegel} : Utilisé pour les applications du problème, notamment pour l'équation de la corde vibrante et de la chaleur.
+  \item[] \emph{Green's Functions and Boundary Value Problems - Third Edition, Ivar Stakgold, Michael Holst} : utilisé pour les applications des problèmes en dimension 2.
+  \item[] \emph{Elementary Differential Equations and Boundary Value Problems, William Boyce, Richard Diprima, Douglas Meade} : ouvrage très lisible et bien rédigé, utilisé pour les applications et légèrement pour la résolution en dimension 1. Uti
+  \item[] \emph{Analyse Numérique - La méthode des différences finies, Sébastien Tordeux, Victor Péron} : cours du M1 MMS de l'Université de Pau, utilisé dans la partie des différences finies et pour la compréhension générale de la méthode.
+\item[] \emph{Differential Equations with Boundary Value Problems, Dennis Zill} : utilisé dans le cadre de l'étude de la méthode d'Euler.
+\end{itemize}
 	
 \section{Introduction au problème}
 
@@ -102,7 +127,7 @@ selon le théorème fondamental de l'Analyse, avec
 \end{equation}
 ce qui nous permettra d'introduire avec $G$ le concept de \emph{Fonction de Greene}.
 
-Les applications du problème aux limites en dimension 1 sont multiples, et relativement nombreuses dans la physique où sa résolution permet la simulation de plusieurs phénomènes tels que la conduction de la chaleur, et les défomrations élastiques.
+Les applications du problème aux limites en dimension 1 sont multiples, et relativement nombreuses dans la physique où sa résolution permet la simulation de plusieurs phénomènes tels que la conduction de la chaleur, et les déformations élastiques : il est donc intéressant de trouver un moyen efficace de les résoudre. Pour y parvenir, nous utiliserons des méthodes d'approximation numérique, telle que la méthode des différences finies.
 
 Historiquement parlant, les problèmes aux limites sont apparus avec le développement de la physique: plusieurs mathématiciens tels que Jean Baptiste Fourier et Carl Gauss ont largement participé au développement de cette classe de problèmes au 19e siècle, dans le cadre de résolution de problèmes pour la physique.
 Les problèmes aux limites sont encore actuellement largement utililisés en recherche, notamment en physique où la réslution d'équations différentielles est courante.
@@ -111,7 +136,7 @@ Les problèmes aux limites sont encore actuellement largement utililisés en rec
 
 \section{Méthode des différences finies}
 
-\quad Développée en 1715 par Brook Taylor dans son ouvrage \emph{Methodus incrementorum directa et inversa}, la méthode des diffrences finies est un procédé courant utilisé pour approcher la solution d' équations différentielles. En résumé, on établit une grille de points généralement uniforme sur l'espace de recherche pour discrétiser le problème (le réduire à un nombre fini de pas), puis on réduit la distance entre les points pour approcher au maximum la solution.
+\quad Développée en 1715 par Brook Taylor dans son ouvrage \emph{Methodus incrementorum directa et inversa}, la méthode des diffrences finies est un procédé courant utilisé pour approcher la solution d' équations différentielles. En résumé, on établit une grille de points généralement uniforme sur l'espace de recherche pour discrétiser le problème (le réduire à un nombre fini de pas), puis on réduit la distance entre les points pour approcher au maximum la solution. \\
 \quad Formellement, on utilise la formule de Taylor pour discrétiser les différentielles n-ièmes : on peut alors choisir la formule de Taylor-Young, ou la formule de Taylor avec reste intégral pour évaluer les erreurs (la discrétisation induit une approximation, qui engendre des erreurs).
 Dans le cas de Taylor-Young simple (on appellera ici de cette manière la formule de Taylor sans reste intégral), on a:
 $$
@@ -129,9 +154,6 @@ On appelle \emph{une différence finie à p points} une combinaison linéaire de
 \end{equation}
 
 
-%différences finies : voir alfredo quarteroni page 360
-
-
 
 \quad Cette méthode permet donc de décomposer les équations différentielles ordinaires en un système d'équations linéaires, solvable en utilisant l'algèbre linéaire.
 
@@ -145,7 +167,7 @@ avec la condition initiale
 \begin{equation} \label{condInitPVI}
 y(t_0) = y_0
 \end{equation}
-Nous pouvons remarque que ce problème ressemble fortement au problème aux limites, sauf qu'ici il n'y en a qu'une. Dans Méthodes Numériques d'Alfio Quarteroni, cet exemple est utilisé en donnant $\frac{dy}{dt} = 0$, la résolution reste la même.
+Nous pouvons remarque que ce problème ressemble fortement au problème aux limites, sauf qu'ici il n'y en a qu'une. Dans Méthodes Numériques d'Alfio Quarteroni, cet exemple est utilisé en donnant $\frac{dy}{dt} = 0$, la résolution reste la même. \\
 \quad Nous supposerons ici que les fonctions $f$ et $y$ sont continues dans le compact contenant le point $(t_0, y_0)$ Nous savons alors qu'il existe une solution ans un certain intervalle autour de $t_0$.  Nous supposerons la la solution est unique, en partant du principe que la fonction $f$ est linéaire sans quoi l'intervalle pourrait être difficile à déterminer. 
 
 \quad La méthode d'Euler est relativement simple : si on réécrit l'équation \eqref{problemevaleurinitiale} au point $t_n$ (toujours dans le compact de définition), nous pouvons arriver à la forme
@@ -164,9 +186,10 @@ qui, en supposant le pas uniforme et de valeur $h$ se simplifie en
 \begin{equation} \label{eulerSimple}
 y_{n+1} = y_n + h*f_n \espace \forall n \in \N
 \end{equation}
+
 La méthode d'Euler consiste à calculer l'équation \eqref{eulerSimple} en boucle en utilisant le résultat de l'étape précédente pour la nouvelle évaluation. L'algorithme est très simple, et nous pouvons dès à présent constater qu'il est extrêmement important d'éviter l'amplification d'erreurs d'étape en étape, en évaluant leur propagation.
-Afin de comprendre les erreurs apparaissant lors de l'utilisation de méthodes numériques d'approximation, nous allons voir quelques méthodes alternatives pour voir la méthode d'Euler sous un autre angle.
-Plusieurs méthodes sont possibles pour y parvenir, l'une d'entre elles est d'écrire le problème \eqref{problemevaleurinitiale} sous la forme d'une intégrale.En supposant $y = \phi(t)$ la solution de notre problème en satisfant la condition \eqref{condInitPVI}, nous avons
+Afin de comprendre les erreurs apparaissant lors de l'utilisation de méthodes numériques d'approximation, nous allons étudier une méthode alternative pour voir la méthode d'Euler sous un autre angle.
+Plusieurs méthodes sont possibles pour y parvenir, l'une d'entre elles est d'écrire le problème \eqref{problemevaleurinitiale} sous la forme d'une intégrale. En supposant $y = \phi(t)$ la solution de notre problème en satisfant la condition \eqref{condInitPVI}, nous avons
 \begin{equation}
 \int_{t_n}^{t_{n+1}} \phi ' (t) dt = \int_{t_n}^{t_{n+1}} f(t, \phi(t)) dt
 \end{equation}
@@ -174,7 +197,7 @@ ce qui revient à dire
 \begin{equation} \label{formeJolie}
 \phi(t_{n+1}) = \phi(t_n) + \int_{t_n}^{t_{n+1}} f(t, \phi(t)) dt
 \end{equation}
-L'intégrale de l'équation ci dessus \eqref{formeJolie} peut être représentée graphiquement comme l'aire sous la courbe de $f$ entre $t_n$ et $t_{n+1}$. En approwimant $f$ par sa fonction discrète en posant $f(t, \phi(t)) \approx f(t_n, \phi(t_n))$ et en gardant l'hypothèse que nous sommes sur une \emph{grille} (si ce concept n'a pas encore été défini, il le sera tout à l'heure) de pas uniforme $h$, nous avons alors:
+L'intégrale de l'équation ci dessus \eqref{formeJolie} peut être représentée graphiquement comme l'aire sous la courbe de $f$ entre $t_n$ et $t_{n+1}$. En approximant $f$ par sa fonction discrète en posant $f(t, \phi(t)) \approx f(t_n, \phi(t_n))$ et en gardant l'hypothèse que nous sommes sur une \emph{grille} (si ce concept n'a pas encore été défini, il le sera tout à l'heure) de pas uniforme $h$, nous avons alors:
 \begin{equation}
 \phi(t_{n+1}) \approx \phi(t_n) + hf(t_n, \phi(t_n))
 \end{equation}
@@ -185,8 +208,8 @@ L'intégrale de l'équation ci dessus \eqref{formeJolie} peut être représenté
 \end{equation}
 Cette expression suppose que le développement de Taylor comprend plus que 2 termes, sinon nous aurions retrouvé une écriture précédente de la formule d'Euler.
 
-\quad L'utilisation de méthodes numériques telles que la formule d'Euler engendre des erreurs, qui doivent être identifiées et dont l'importance doit être vérifiée avant de pouvoir utiliser la solution approximée comme satisfaisante. En effet, un problème se pose pour la \emph{convergence} de la solution : lorsque le pas $h$ (en supposant qu'il soit uniforme, sinon considérer la distance entre les points de la grille) tend vers 0, est ce que al distance entre les solutions approximéees $y_n$ en les points $t_n$ tend vers 0? Et approchent-elles les véritables solutions du problème?
-Même en répondant à ces questions, nous pouvons encore nous demander avec quelle vitesse les solutions convergent-elles ; reformulé, à quel niveau de précision sur $h$ faut-il aller afin de garantir une certaine marge d'erreur maximum? Certains effets de bord peuvent aussi ne pas être évidents : la diminution de la taille du pas afin de garantir une meilleure précision pourrait causer de plus grandes erreurs, qui annuleraient tout bénéfice.
+\quad L'utilisation de méthodes numériques telles que la formule d'Euler engendre des erreurs, qui doivent être identifiées et dont l'importance doit être vérifiée avant de pouvoir utiliser la solution approximée comme satisfaisante. En effet, un problème se pose pour la \emph{convergence} de la solution: lorsque le pas $h$ (en supposant qu'il soit uniforme, sinon considérer la distance entre les points de la grille) tend vers 0, est ce que al distance entre les solutions approximéees $y_n$ en les points $t_n$ tend vers 0? Et approchent-elles les véritables solutions du problème?
+Même en répondant à ces questions, nous pouvons encore nous demander avec quelle vitesse les solutions convergent-elles ; reformulé, à quel niveau de précision sur $h$ faut-il aller afin de garantir une certaine marge d'erreur maximum? \\Certains effets de bord peuvent aussi ne pas être évidents : la diminution de la taille du pas afin de garantir une meilleure précision pourrait causer de plus grandes erreurs, qui annuleraient tout bénéfice.
 
 Il y a un certain nombre de sources fondamentales d'erreurs dans l'approximation numérique d'un problème de valeur initiale (ce qui s'étend aux problèmes aux limites):
 \begin{enumerate}
@@ -227,10 +250,6 @@ Si cette relation est vraie, la méthode numérique est dite consistante. Sinon,
 \quad Nous retrouvons alors la notion de stabilité: une méthode numérique sera considérée \emph{bien posée} ou \emph {stable} si pour tout $n$ il existe une solution $t_n$ \emph{unique} correspondant à la donnée $y_n$, et que $t_n$ dépend des $y_n$ continûment.
 
 
-(ici arretés page 38 de quarteroni)
-
-
-
 \section{Résolution du problème en dimension 1}
 
 \quad Revenons à l'introduction de cet article : nous avions vu que pour $u \in C^2 [0, 1]$ satisfaisant l'équation \eqref{probleme}, on avait $u$ de la forme \eqref{solutionsNaives}  Pour retrouver la fonction de Greene, nous devons intégrer par parties $\int_0^x F\relax(s) ds$ : 
@@ -253,17 +272,19 @@ G\relax(x, s) = \left\{
 \end{equation}
 On remarquera qu'on a continuité de la fonction $G$ pour $s = x$, et que G est une fonction \emph{affine} de $x$ à $s$ fixé, et de $s$ à $x$ fixé. Elle se nomme \emph{Fonction de Greene} pour le problème aux limites défini par \eqref{probleme} et \eqref{limites}.
 
-\subsection{L'histoire avec Greene}
-\quad La fonction de Greene est continue et symétrique sur $[0,1]^2$, ainsi que positive non strictement ($G(x,s) = 0 \Longleftrightarrow x = 0 \lor s = 0$). Son existence dans le problème générique \eqref{probleme} (nous verrons plus tard des applications précises du problème comme la déformation d'une corde élastique) est assurée par sa définition sur tout l'intervalle entre les limites (dans notre cas, \eqref{limites} mais on pourrait fixer d'autres limites). \\
-\quad On voit alors que lorsque $G$ existe et qu'elle est connue formellement, on peut écrire explicitement les soutions du problème aux limites dans une forme très simple.  Un des principaux avantages de la représentation \eqref{introGreene} des solutions du problème est qu'elle élimine la dépendance au terme $f(s)$, qui n'est dépendant que de l'équation différentielle en \eqref{probleme} et des limites qui nous sont imposées : une fois que l'on aura déterminé $G$, les solutions seront connues selon $f(s)$ pour peu pqu'on puisse écrire les solutions sous la forme \eqref{introGreene}. Nous verrons dans les applications que cette forme n'est pas forcément admissible sous toutes les conditions. \\
-\quad De plus, la forme intégrale \eqref{introGreene} est bien plus propice à l'analyse numérique que l'équation différentielle \eqref{probleme}, ce qui rend le traitement par ordinateur bien plus simple et efficace. Les motivations principales sont donc de passer d'une recherche de $u$ à une recherche de $G$ : il faut alors trouver un moyen d'exprimer $G$ sans avoir à résoudre l'équation \eqref{probleme}.\\
+\subsection{Fonction de Greene}
+\quad La fonction de Greene est continue et symétrique sur $[0,1]^2$, ainsi que positive non strictement ($G(x,s) = 0 \Longleftrightarrow x = 0 \lor s = 0$). Son existence dans le problème générique \eqref{probleme} (nous verrons plus tard des applications précises du problème comme la déformation d'une corde élastique) est assurée par sa définition sur tout l'intervalle entre les limites (dans notre cas, \eqref{limites} mais on pourrait fixer d'autres limites). 
+
+On voit alors que lorsque $G$ existe et qu'elle est connue formellement, on peut écrire explicitement les soutions du problème aux limites dans une forme très simple.  Un des principaux avantages de la représentation \eqref{introGreene} des solutions du problème est qu'elle élimine la dépendance au terme $f(s)$, qui n'est dépendant que de l'équation différentielle en \eqref{probleme} et des limites qui nous sont imposées : une fois que l'on aura déterminé $G$, les solutions seront connues selon $f(s)$ pour peu pqu'on puisse écrire les solutions sous la forme \eqref{introGreene}. Nous verrons dans les applications que cette forme n'est pas forcément admissible sous toutes les conditions. 
+
+De plus, la forme intégrale \eqref{introGreene} est bien plus propice à l'analyse numérique que l'équation différentielle \eqref{probleme}, ce qui rend le traitement par ordinateur bien plus simple et efficace. Les motivations principales sont donc de passer d'une recherche de $u$ à une recherche de $G$ : il faut alors trouver un moyen d'exprimer $G$ sans avoir à résoudre l'équation \eqref{probleme}.\\
 Nous pouvons alors lister quelques propriétés de la fonction de Greene, qui nous seront utiles par la suite dans la résolution du problème:
 \begin{enumerate}
   \item $G$ satisfait l'équation homogène de  \eqref{probleme}:
 	\begin{equation}
 		G'' = 0
 	\end{equation}
-	sur les intervalles $0 \le s < x$ et $x < s \le L$ avec dans notre cas L = 1. Généralement, on a bien continuité en $s = x$, nous le prouverons dans le cas du problème de l'élasticité d'une corde. (ou pas? Remettre la démo éventuellement)
+	sur les intervalles $0 \le s < x$ et $x < s \le L$ avec dans notre cas L = 1. Généralement, on a bien continuité en $s = x$.
   \item $G(x, 0) = G(x, L)$, elle satisfait donc les conditions limites \eqref{limites}.
   \item $G(x,s) = G(s, x)$, G est symétrique sur ses arguments.
 \end{enumerate}
@@ -325,7 +346,7 @@ ce qui nous donne enfin
 \begin{dmath}
 u(x) =  \int_0^x\frac{sin(ks) sin(k(1-x))}{k sin(k)}ds + \int_x^1 f(s) \frac{sin(kx) sin(k(1-s))}{k sin(kl)} ds = \int_0^1 f(s) G(x,s) ds
 \end{dmath}
-qui revient au même pour introduire la fonction de Greene, de manière bien détaillée cette fois. On a par la même occasion montré la consistance du problème aux limites (revoir la def!!!!). \\
+qui revient au même pour introduire la fonction de Greene, de manière bien détaillée cette fois. On a par la même occasion montré la consistance du problème aux limites. \\
 Finalement, nous aboutissons à une forme de $G$ intéressante:
 \begin{equation}
 G(x, s) = \frac{sin(ky) sin(k(1-x)}{k sin(k)} \espace s\in [0, x] 
@@ -334,16 +355,19 @@ G(x, s) = \frac{sin(ky) sin(k(1-x)}{k sin(k)} \espace s\in [0, x]
 G(x, s) = \frac{sin(kx) sin(k(1-s)}{k sin(k)} \espace s\in [x,1]
 \end{equation}
 
-À partir d'ici, nous pouvons vérifier aisément que la fonction $G$ est continue en $s=x$, et que sa dérivée est discontinue en ce même point.
+À partir d'ici, nous pouvons vérifier aisément que la fonction $G$ est continue en $s=x$, et que sa dérivée est discontinue en ce même point, ce qui termine notre démonstration.
+\newline
 %FIN DE L'ENCADRÉ
 \\
-Depuis \eqref{dernierRempartDeLEncadre}, nous pouvons alors conclure que
+Revenons au problème : depuis \eqref{dernierRempartDeLEncadre}, nous pouvons alors conclure que
 \begin{equation}
 u(s) = \int_0^1 f(x)G(x, s) ds
 \end{equation}
-et nous obtenons alors une représentation désirable de la solution duproblème aux limites par une fonction $G$. Cette fonction vérifie tous les axiomes de la fonction de Greene énoncés auparavant, nous avons donc établi une méthode pour retrouver la solution des problèmes aux limites d'une manière relativement directe. Néanmoins, cette méthode suppose que nous connaissions la fonction $G$.
+et nous obtenons alors une représentation désirable de la solution du problème aux limites par une fonction $G$. Cette fonction vérifie tous les axiomes de la fonction de Green énoncés auparavant, nous avons donc établi une méthode pour retrouver la solution des problèmes aux limites d'une manière relativement directe. Néanmoins, cette méthode suppose que nous connaissions la fonction $G$.
 
 \subsection{Suite de la resolution : approximation par différences finies}
+
+L'approximation par différences finies est utilisée pour ne pas avoir à calculer formellement le ssolutions du problème, mais plutôt de les approximer. En effet, de nombreuses applications physiques peuvent se contenter d'une bonne approximation plutôt que d'une résolution complète et la méthodes par différences finies est facilement informatisable.
 
 Sur la grille des points $(x_j)_{j = 0}^n$ de pas uniforme $h$ (on a donc $x_j = jh$) sur $[0,1]$, l'approximation de la solution est une suite finie $(u_j)_{j = 0]}^n$ telle que:
 \begin{equation} \label{diffsFiniesProbleme}
@@ -359,7 +383,7 @@ avec $A_{df}$ matrice carrée de différences finies de taille $(n-1)$ définie 
 \begin{equation}
 	A_{fd} = h^{-2} tridiag_{n-1} (-1, 2, -1)
 \end{equation}
-Elle est à diagonale dominante par ligne, et définie positive (démontrable).
+Elle est à diagonale dominante par ligne, et définie positive.
 
 Alors, l'équation \eqref{turboCompact} n'admet qu'une unique solution.\\ Définissons les M-Matrices comme suit : une M-Matice est une matrice carrée inversible avec tous ses coefficients non sur la diagonale négatifs ou nuls, ainsi que tous les coefficients de son inverse sont positifs ou nuls.
 Nous pouvons noter que $A_{df}$ est une M-Matrice, ce qui permet de satisfaire la condition de monotonie de la solution exacte $u(x)$ : nous avons alors $f >0 \Longrightarrow u>0$ (propriété du \emph{maximum discret}).
@@ -389,7 +413,6 @@ Nous pouvons alors émettre plusieurs propriétés sur ce produit scalaire. Tout
 \begin{equation}
 	(L_h w_h, v_h)_h = (v_h, L_h w_h)_h \espace (L_h v_h, v_h)_h \ge 0 (0 \Leftrightarrow v_h = 0)
 \end{equation}
-(démonstration possible)
 
 On définit la norme $|||.|||_h$ sur $V_h^0$ par:
 \begin{equation}
@@ -404,7 +427,7 @@ De plus, on a:
 \begin{equation} \label{majorationNorme}
 	||v_h||_h^2 \le \frac{1}{\sqrt{2}} |||v_h||||_h \espace \forall v_h \in V_h^0
 \end{equation}
-(démonstration possible, on utilise l'inégalité de Minkowski en repartant de la définition des $v_j$)\\
+(Pour le démontrer,, on utilise l'inégalité de Minkowski en repartant de la définition des $v_j$.)\\
 De même, on peut écrire la version discrète de \emph{l'inégalité de poincaré}: en notant $v_h^{(1)}$ la fonction discrète de $v_h$ dans $V_h^0$ prenant ses valeurs sur la grille par $(v_{j+1}-v_j)/h$ avec $j \in [[0, n-1]]$, on peut la voir commme la dérivée discrète de $v_h$.\\
 On peut alors écrire l'inégalité comme
 \begin{equation}
@@ -425,7 +448,6 @@ Alors,  on a
 \begin{equation} \label{preuveStabilité}
 ||u_h||_h \le \frac{1}{2}||f_d||_h
 \end{equation}
-Regarder d'où sortent les uh qui trainent par ici!!!!!!!!!!!!!!!!!!!!!!!!! \\
 ce qui conclut que la seule solution correspondant à $f_d = 0$ est $u_h = 0$, donc le problème aux différences finies ne possède qu'une seule solution. La stabilité, titre de cette section, est quant à elle donnée par la majoration (ou \emph{borne}, comme on est sur une norme) de la solution par $f_d$ qui est une des données du problème.
 
 \subsection{Consistance}
@@ -437,7 +459,7 @@ En développant par Taylor, on a:
 \begin{equation}
 \tau_h(x_j) = (L_h u)(x_j)  + u''(x) = -\frac{h^2}{24}(u^{(iv))} (\chi_j) + u^{(iv))} (\nu_j))
 \end{equation} \label{devTaylorTroncLoc}
-avec $\nu_j \in ]x_j, x_{j+1}[ \wedge \chi_j \in ]x_{j-1}, x_j[$.
+avec $\nu_j \in ]x_j, x_{j+1}[ \espace \wedge \espace \chi_j \in ]x_{j-1}, x_j[$.
 \\ On peut définir la \emph{norme discrète du maximum} par
 \begin{equation} \label{defNormeDiscreteDuMaximum}
 || v_h ||_{h, \infty}  = \max_{0 \le j \le n} |v_h(x_j)|
@@ -456,10 +478,10 @@ w_h = \sum_{k=1}^{n-1} g(x_k) G^k
 \end{equation}
 où nous posons G fonction de Greene.
 
-Nous laisons le soin au lecteur de voir p 428 d'alfio quarteroni.
+Nous laisons le soin au lecteur de voir page 428 de Méthodes Numériques (cf. bibliographie).
 
-\subsection{différences finies pour les problèmes en dimension 1}
-Dans cette partie, on utilisera une généralisation du problème aux limites \eqref{probleme} \eqref{limite} en une dimension:
+\subsection{Différences finies pour les problèmes en dimension 1}
+Dans cette partie, on utilisera une généralisation du problème aux limites \eqref{probleme} \eqref{limites} en une dimension:
 \begin{equation} \label{generalisationLu}
 Lu(x) = -(J(u)(x))' + \gamma (x) u(x)  = f(x) \espace \forall x \in ]0,1[
 \end{equation}
@@ -469,7 +491,7 @@ u(0) = d_0 \espace u(1) = d_1
 \end{equation}
 en posant $J(u)(x) = \alpha(x) u'(x)$ et $\alpha$, $\gamma \ge 0$, $f$ des fonctions connues et continues sur l'intervalle $[0,1]$. L'hypothèse de continuité est généralement vérifiée dans les applications physiques.  Nous appellerons $J(u)$ le \emph{flux associé à u}, il nous sera utile dans la partie de résolution des applications.
 
-Pour l'application, nous suivrons la méthode décrite dans Alfio Quarteroni : nous reprendrons la grille uniforme précédente des $(x_j)$, et nous créerons une nouvelle grille utilisant les \emph{points milieu} de cette grille: nous définirons les point milieu comme les $x_{j+1/2} = (x_j + x_{j+1}) /2 \espace \forall j \in [[1,n-1]]$. \\
+Pour l'application, nous suivrons la méthode décrite dans Méthodes Numériques : nous reprendrons la grille uniforme précédente des $(x_j)$, et nous créerons une nouvelle grille utilisant les \emph{points milieu} de cette grille: nous définirons les point milieu comme les $x_{j+1/2} = (x_j + x_{j+1}) /2 \espace \forall j \in [[1,n-1]]$. \\
 Alors, nous pouvons introduire un nouveau schéma aux différences finies pour approcher \eqref{generalisationLu}: nous cherchons $u_h \in V_h \espace |$
 \begin{equation} \label{miseEnFormeTemporaire}
 L_h u_h (x_j) = f(x_j) \espace \forall j \in [[1,n-1]]
@@ -497,7 +519,7 @@ avec:
   \item $d = [\alpha_{1/2}+\alpha_{3/2}, ..., \alpha_{n-3/2} +\alpha_{n-1/2}]^T$
   \item $c = [\gamma_1, ..., \gamma_{n-1}]^T$
 \end{itemize}
-Avec les facteurs de $a$, $d$, $c$ dans $\R$. La démonstration est assez longue et calculatoire, et globalement peu intéressante ici, nous renvoyons à Alfio Quarteroni?.
+Avec les facteurs de $a$, $d$, $c$ dans $\R$. La démonstration est assez longue et calculatoire, et globalement peu intéressante ici, nous renvoyons à Méthodes Numériques pour s'en convaincre, ou alors à la suite pour s'en \emph{persuader}.
 
 Nous pouvons dès lors remarquer que la matrice $A_{fd}$ de \eqref{definitionADF} est définie positive, symétrique, et à diagonale strictement dominante (la valeur avsolue de chaque terme sur la diagonale est supérieur non strictement à la somme des valeurs absolues des autres termes de sa ligne) pourvu que $\gamma > 0$.\\
 \quad On peut analyser la convergence de ce schéma aux différences finies en reprenant la technique de la Méthode de l'Energie vue précédemment.
@@ -529,7 +551,7 @@ Nous pouvons alors reprendre le point fantôme vu dans \eqref{pointFantome} pour
 
 \subsection{Introduction à la formulation intégrale}
 
-Nous utiliseraons dans cette partie les notations d'alfio Quarteroni. Le problème aux limites \eqref{probleme} peut être généralisé comme
+Nous utiliseraons dans cette partie les notations d'Alfio Quarteroni. Le problème aux limites \eqref{probleme} peut être généralisé comme
 \begin{equation} \label{generalisation}
 -(\alpha u')'(x) + (\beta u')(x) + (\gamma u)(x) = f(x) \espace \forall u \in ]0,1[
 \end{equation}
@@ -542,7 +564,6 @@ après une intégration par parties sur le premier terme. En appliquant les cond
 \begin{equation}
 \int_0^1 \alpha u' v' dx + \int_0^1 \beta u' v dx + \int_0^1 \gamma u v dx = \int_0^1 fv dx 
 \end{equation}
-Voir si on garde le truc avant, ca sert peu!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 On posera $V$ l'espace des fonctions test telles $v$, en prenant compte les conditions limites : cet espace contient des fonctions continues, s'annulant en 0 et en 1, et de dérivée continue par morceaux. C'est alors un espace vectoriel, que l'on peut aussi noter 
 \begin{equation}
@@ -562,11 +583,11 @@ forme bilinéaire par rapport à $(u,v)$.
 
 On appellera \emph{formulation faible} le problème \eqref{problemeSecondaire} : cette formulation est plus généaliste, car ellle permet d'étudier des cas où $u$ n'est pas de classe $C^2$, car les dérivées sont toutes simples. Cette formulation permet de décrire par exemple le problème de la déformation d'une corde élastique, qui sera étudié par la suite.
 
-En cas de non homogénité des conditions limites dans \eqref{generalisation} (ce qui arrive dans le cas général), il est toujours possible de se ramener à la forme \eqref{problemeSecondaire} en utlisant des \emph{conditions limites de Neumann} et une interpolation des extrémités par une fonction affine (détails dans quarteroni, page 433).
+En cas de non homogénité des conditions limites dans \eqref{generalisation} (ce qui arrive dans le cas général), il est toujours possible de se ramener à la forme \eqref{problemeSecondaire} en utlisant des \emph{conditions limites de Neumann} et une interpolation des extrémités par une fonction affine.
 
 \subsection{Bases des distributions}
 
-Cette section est dédiée à la présentation des bases de la théorie des distributions, qui nous sera utile ors de l'étude des propriétés de la méthode de Galerkin. En résumé, la théorie des distributions est un outil servant à généraliser la notion de dérivée d'une fonction, afin de pouvoir résoudre certaines équations différentielles (par exemple, un problème aux limites en dimension 1). Les distributions utilisent une méthode différente pour évaluer une fonction : au lieu d'évaluer la fonction en un point, on évalue la fonction sur un voisinage du point tout en effectuant une moyenne (posiblement pondérée) sur ces points afin de réduire le poids des discontinuité dans le résultat.
+Cette section est dédiée à la présentation des bases de la théorie des distributions, qui nous sera utile lors de l'étude des propriétés de la méthode de Galerkin. En résumé, la théorie des distributions est un outil servant à généraliser la notion de dérivée d'une fonction, afin de pouvoir résoudre certaines équations différentielles (par exemple, un problème aux limites en dimension 1). Les distributions utilisent une méthode différente pour évaluer une fonction : au lieu d'évaluer la fonction en un point, on évalue la fonction sur un voisinage du point tout en effectuant une moyenne (possiblement pondérée) sur ces points afin de réduire le poids des discontinuité dans le résultat.
 
 Supposons $X$ un espace vectoriel normé complet (c'est à dire un \emph{espace de Banach}). Définissons une \emph{forme} $T: X \rightarrow \R$ continue linéaire sur $X$. Nous utiliserons la notation de \emph{dualité}, utilisée dans la théorie des distributions:
 \begin{equation}
@@ -583,7 +604,7 @@ Nous avons maintenant les bases pour introduire les \emph{dérivées au sens des
 \langle T^{(k)}, \phi \rangle = (-1)^k \langle T, \phi^{(k)} \rangle \espace \forall \phi \in C_0^\infty(]0,1[)
 \end{equation}
 
-Un court exemple est disponible dans Alfio Quarteroni.
+Un court exemple est disponible dans Méthodes Numériques.
 
 \subsection{Propriétés de la méthode de Galerkin}
 
@@ -593,7 +614,7 @@ En supposant $V_h$ un sous espace vectoriel de $V$ tel que $dim(V_h) < \infty$, 
 u_h \in V_h \espace | \espace a(u_h, v_h) = (f(v_h) \espace \forall v_h \in V_h
 \end{equation}
 Qui devient un autre problème lorsqu'on cherche $u_h$.
-Il n'est pas forcément évident que ce problème soit en dimension finie (EXPLIQUER PQ?), nous allons le montrer. Soit $\{\phi_1, ..., \phi_N\}$ base de $V_h$, avec $dim(V_h) = N$. On peut alors dire que 
+Il n'est pas forcément évident que ce problème soit en dimension finie, nous allons le montrer. Soit $\{\phi_1, ..., \phi_N\}$ base de $V_h$, avec $dim(V_h) = N$. On peut alors dire que 
 \begin{equation}
 u_h(x) = \sum_{j = 1}^{N} u_j \phi_j(x)
 \end{equation}
@@ -612,10 +633,6 @@ Nous pourrions démontrer par la suite que la méthode de Galerkin est bornée p
 La méthode de Galerkin permet alors de trouver des solutions au problème aux différences finies, pour peu que l'on connaisse $V_h$. Une méthode possible pour trouver $V_h$ est la méthode des \emph{éléments finis}: en résumé, elle consiste ici à discrétiser l'espace de recherche, puis d'approximer la solution de l'équation différentielle interpolant la solution en chaque point discrétisé de manière à avoir un résultat satisfaisant (continu notamment).\\
 Nous ne traiterons pas cette méthode ici par manque de temps.
 
-
-
-
-\section{Introduction à la résolution du problème en dimension 2}
 
 
 \section{Applications}
@@ -695,7 +712,7 @@ en reprenant les notations de l'exemple sur la conduction de la chaleur.
 
 
 \subsection{Equations hyperboliques et elliptiques}
-Greens functions \& bvp page 465
+%Greens functions \& bvp page 465
 
 Les problèmes elliptiques et hyperboliques se rapportent à des équations différentielles du second ordre. N'ayant pas de méthode de résolution des problèmes aux limites en dimension 2 ici, nous nous contenterons de décrire ces problèmes.\\
 Considérons l'équation du second ordre à deux variables suivante à deux variables $x$ et $y$:
@@ -729,5 +746,10 @@ En transformant ces équations en un système, nous pouvons alors vérifier que 
 \item Si $b^2 - 4ac <0$,  l'équation est dite \emph{elliptique} au point $p$,  et aucune courbe $\Gamma$ ne peut satisfaire \eqref{trucASatisfaire}: elle est similaire à l'équation de Laplace.
 \item Si $b^2 - 4ac >0$, il y a deux directions caractéristiques en $p$ et l'équation est dite \emph{hyperbolique} en $p$.  L'équation de la défomation d'un plan élastique (une corde élastique en 2 dimensions) vue précédemment est elle aussi hyperbolique.
 \end{itemize}
+
+\section{Conclusion}
+
+\quad En conclusion, nous avons survolé quelques méthodes de résolution des problèmes aux limites en dimension 1, ainsi que fait le lien avec ces problèmes théoriques mathématiques et des problèmes physiques concrets. Nous avons également vu que ces problèmes physiques peuvent se contenter d'une bonne approximation de la solution du problème, d'où l'importance des méthodes numériques dans la résolution des problèmes aux limites.
+
 
 \end{document}
